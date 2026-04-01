@@ -3,66 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MemRSyS | Yerli Nöromorfik NPU &amp; PDK</title>
+    <title>MemRSyS | Intelligence at the Edge</title>
     <meta name="description" content="CMOS uyumlu memristör tabanlı, ultra-düşük güçlü yerli Nöromorfik İşlem Birimi (NPU) IP çekirdeği ve PDK. Savunma, havacılık ve kenar YZ uygulamaları için.">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --cyan: #00d4ff;
-            --bg: #0a0e14;
-            --bg2: #111720;
-            --bg3: #161b22;
-            --border: #21282f;
-            --text: #c9d1d9;
-            --text-dim: #8b949e;
-            --red: #ff4444;
-            --green: #39d353;
-            --yellow: #e3b341;
+            --cyan: #00d4ff; --bg: #0a0e14; --bg2: #111720; --bg3: #161b22;
+            --border: #21282f; --text: #c9d1d9; --text-dim: #8b949e;
+            --red: #ff4444; --green: #39d353; --yellow: #e3b341;
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 100;
-            background: rgba(10,14,20,0.92); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 5%;
-        }
+
+        nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(10,14,20,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
         .nav-logo { font-size: 1.4rem; font-weight: 700; color: var(--cyan); letter-spacing: 2px; padding: 18px 0; text-decoration: none; }
-        .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-motto { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; padding-left: 12px; border-left: 1px solid var(--border); margin-left: 12px; }
+        .nav-left { display: flex; align-items: center; }
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
         .nav-links a:hover { color: var(--cyan); }
-        header {
-            min-height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 120px 20px 80px;
-            background: radial-gradient(ellipse 80% 60% at 50% 0%, #0d2233 0%, var(--bg) 70%);
-            position: relative; overflow: hidden;
-        }
-        header::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300d4ff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        .badge { display: inline-block; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: var(--cyan); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
-        header h1 { font-size: clamp(3rem, 8vw, 5.5rem); color: #fff; letter-spacing: 4px; margin-bottom: 12px; }
+
+        /* HERO */
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 80px; background: radial-gradient(ellipse 80% 60% at 50% 0%, #0d2233 0%, var(--bg) 70%); position: relative; overflow: hidden; }
+        .hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+        .hero-glow { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(0,212,255,0.08) 0%, transparent 70%); pointer-events: none; }
+        .badge { display: inline-block; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: var(--cyan); padding: 6px 16px; border-radius: 20px; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; position: relative; }
+        header h1 { font-size: clamp(3rem, 8vw, 5.5rem); color: #fff; letter-spacing: 6px; margin-bottom: 8px; position: relative; }
         header h1 span { color: var(--cyan); }
-        header h2 { font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--text-dim); font-weight: 400; margin-bottom: 20px; }
-        header p { max-width: 620px; font-size: 1.05rem; color: var(--text-dim); margin-bottom: 40px; }
-        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+        .motto { font-size: clamp(0.9rem, 2vw, 1.15rem); color: var(--cyan); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; opacity: 0.85; position: relative; }
+        header p { max-width: 620px; font-size: 1.05rem; color: var(--text-dim); margin-bottom: 40px; position: relative; }
+        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; position: relative; }
         .btn { padding: 13px 28px; border-radius: 6px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.25s; cursor: pointer; }
         .btn-primary { background: var(--cyan); color: #0a0e14; }
         .btn-primary:hover { background: #fff; }
         .btn-outline { border: 1px solid var(--cyan); color: var(--cyan); background: transparent; }
         .btn-outline:hover { background: rgba(0,212,255,0.1); }
+
+        /* CHIP VISUAL */
+        .chip-visual { position: relative; margin: 60px auto 0; width: 200px; height: 200px; }
+        .chip-core { width: 100px; height: 100px; background: linear-gradient(135deg, #0d2233, #1a3a50); border: 2px solid var(--cyan); border-radius: 8px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(0,212,255,0.2), inset 0 0 20px rgba(0,212,255,0.05); z-index: 2; }
+        .chip-label { color: var(--cyan); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-align: center; line-height: 1.4; }
+        .chip-pin { position: absolute; background: var(--cyan); opacity: 0.6; border-radius: 1px; }
+        .chip-pin.top, .chip-pin.bottom { width: 2px; height: 14px; }
+        .chip-pin.left, .chip-pin.right { width: 14px; height: 2px; }
+        .chip-pin.top:nth-child(1) { left: 70px; top: 18px; }
+        .chip-pin.top:nth-child(2) { left: 84px; top: 18px; }
+        .chip-pin.top:nth-child(3) { left: 98px; top: 18px; }
+        .chip-pin.top:nth-child(4) { left: 112px; top: 18px; }
+        .chip-pin.bottom:nth-child(5) { left: 70px; bottom: 18px; }
+        .chip-pin.bottom:nth-child(6) { left: 84px; bottom: 18px; }
+        .chip-pin.bottom:nth-child(7) { left: 98px; bottom: 18px; }
+        .chip-pin.bottom:nth-child(8) { left: 112px; bottom: 18px; }
+        .chip-pin.left:nth-child(9) { top: 70px; left: 18px; }
+        .chip-pin.left:nth-child(10) { top: 84px; left: 18px; }
+        .chip-pin.left:nth-child(11) { top: 98px; left: 18px; }
+        .chip-pin.left:nth-child(12) { top: 112px; left: 18px; }
+        .chip-pin.right:nth-child(13) { top: 70px; right: 18px; }
+        .chip-pin.right:nth-child(14) { top: 84px; right: 18px; }
+        .chip-pin.right:nth-child(15) { top: 98px; right: 18px; }
+        .chip-pin.right:nth-child(16) { top: 112px; right: 18px; }
+        @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; } 100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; } }
+        .chip-ring { position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; border: 1px solid var(--cyan); border-radius: 50%; animation: pulse-ring 2.5s infinite; }
+        .chip-ring2 { animation-delay: 1.25s; }
+
+        /* STATS */
         .stats-bar { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; justify-content: space-around; flex-wrap: wrap; gap: 10px; padding: 30px 5%; }
         .stat { text-align: center; padding: 10px 20px; }
         .stat-num { font-size: 2.2rem; font-weight: 700; color: var(--cyan); }
         .stat-label { font-size: 0.8rem; color: var(--text-dim); margin-top: 4px; }
+
         section { padding: 90px 5%; max-width: 1100px; margin: auto; }
         .section-tag { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
         h2.section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); color: #fff; margin-bottom: 16px; }
         .section-sub { color: var(--text-dim); max-width: 600px; margin-bottom: 50px; font-size: 1rem; }
+
+        /* PROBLEM */
         .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .problem-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 28px; position: relative; overflow: hidden; }
         .problem-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
@@ -72,12 +87,24 @@
         .problem-card h3 { font-size: 1.1rem; color: #fff; margin-bottom: 12px; }
         .problem-card p { color: var(--text-dim); font-size: 0.92rem; }
         .problem-num { font-size: 2.5rem; font-weight: 800; opacity: 0.08; position: absolute; top: 10px; right: 20px; color: var(--cyan); }
+
+        /* TECH */
         .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
         .tech-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 26px; transition: border-color 0.3s, transform 0.3s; }
         .tech-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
         .tech-icon { font-size: 2rem; margin-bottom: 14px; }
         .tech-card h3 { color: var(--cyan); font-size: 1rem; margin-bottom: 10px; }
         .tech-card p { color: var(--text-dim); font-size: 0.88rem; }
+
+        /* CROSSBAR VISUAL */
+        .crossbar-wrap { display: flex; align-items: center; justify-content: center; gap: 50px; flex-wrap: wrap; margin-bottom: 50px; }
+        .crossbar-svg { flex-shrink: 0; }
+        .crossbar-info { max-width: 380px; }
+        .crossbar-info h3 { color: #fff; font-size: 1.2rem; margin-bottom: 12px; }
+        .crossbar-info p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 10px; }
+        .crossbar-info .formula { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-top: 16px; font-family: monospace; color: var(--cyan); font-size: 0.88rem; line-height: 1.8; }
+
+        /* COMPARE TABLE */
         .spec-wrapper { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
         table { width: 100%; border-collapse: collapse; }
         thead { background: rgba(0,212,255,0.07); }
@@ -86,17 +113,23 @@
         tr:hover td { background: rgba(0,212,255,0.03); }
         .good { color: var(--green); font-weight: 600; }
         .bad { color: var(--red); }
+
+        /* MARKET */
         .market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         .market-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 26px; }
         .market-card h3 { color: var(--yellow); font-size: 1rem; margin-bottom: 8px; }
         .market-card .big { font-size: 1.9rem; font-weight: 700; color: #fff; }
         .market-card p { color: var(--text-dim); font-size: 0.85rem; margin-top: 6px; }
+
+        /* PROGRAMS */
         .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
         .prog-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 26px; text-align: center; }
         .prog-card .prog-logo { font-size: 2.4rem; margin-bottom: 12px; }
         .prog-card h3 { color: #fff; font-size: 1rem; margin-bottom: 8px; }
         .prog-card p { color: var(--text-dim); font-size: 0.84rem; }
         .prog-badge { display: inline-block; margin-top: 12px; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+
+        /* TEAM */
         .team-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 30px; display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
         .team-avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), #005577); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 700; color: #0a0e14; flex-shrink: 0; }
         .team-info h3 { color: #fff; font-size: 1.05rem; margin-bottom: 4px; }
@@ -104,23 +137,31 @@
         .team-info p { color: var(--text-dim); font-size: 0.88rem; }
         .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
         .tag { padding: 4px 10px; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); border-radius: 4px; font-size: 0.75rem; color: var(--cyan); }
+
+        /* CONTACT */
         .contact-box { background: radial-gradient(ellipse 80% 60% at 50% 100%, #0d2233 0%, var(--bg2) 70%); border: 1px solid var(--border); border-radius: 14px; padding: 60px 40px; text-align: center; }
         .contact-box h2 { font-size: 2rem; color: #fff; margin-bottom: 16px; }
         .contact-box p { color: var(--text-dim); max-width: 500px; margin: 0 auto 30px; }
         .contact-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
         .contact-link { display: flex; align-items: center; gap: 8px; padding: 12px 22px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-size: 0.9rem; transition: all 0.25s; }
         .contact-link:hover { border-color: var(--cyan); color: var(--cyan); }
+
         footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         footer .logo { font-size: 1.1rem; font-weight: 700; color: var(--cyan); letter-spacing: 2px; }
+        footer .footer-motto { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; }
         footer p { color: var(--text-dim); font-size: 0.8rem; }
         .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
-        @media (max-width: 600px) { .nav-links { display: none; } .stats-bar { gap: 0; } .contact-box { padding: 40px 20px; } }
+
+        @media (max-width: 600px) { .nav-links { display: none; } .nav-motto { display: none; } .stats-bar { gap: 0; } .contact-box { padding: 40px 20px; } .crossbar-wrap { gap: 30px; } }
     </style>
 </head>
 <body>
 
 <nav>
-    <a class="nav-logo" href="#">MemRSyS</a>
+    <div class="nav-left">
+        <a class="nav-logo" href="#">MemRSyS</a>
+        <span class="nav-motto">Intelligence at the Edge</span>
+    </div>
     <ul class="nav-links">
         <li><a href="#sorun">Sorun</a></li>
         <li><a href="#teknoloji">Teknoloji</a></li>
@@ -132,16 +173,40 @@
 </nav>
 
 <header>
-    <div class="badge">TÜBİTAK BİGG · Havacılık &amp; Uzay · Savunma Sanayii</div>
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="badge">Yerli Nöromorfik NPU · IP Çekirdeği · PDK</div>
     <h1>Mem<span>R</span>SyS</h1>
-    <h2>Yerli Nöromorfik NPU — Kenar YZ için Anlık Zeka</h2>
-    <p>
-        CMOS uyumlu memristör crossbar mimarisi üzerinde analog in-memory inference gerçekleştiren,
-        lisanslanabilir NPU IP çekirdeği ve PDK. UAV, İHA ve taktik sistemler için &lt;1 W güç bütçesinde.
-    </p>
+    <div class="motto">Intelligence at the Edge</div>
+    <p>CMOS uyumlu memristör crossbar mimarisi üzerinde analog in-memory inference gerçekleştiren lisanslanabilir NPU IP çekirdeği ve PDK. &lt;1 W güç bütçesinde gerçek zamanlı YZ.</p>
     <div class="btn-group">
         <a href="teknoloji.html" class="btn btn-primary">Teknolojiyi İncele</a>
         <a href="#iletisim" class="btn btn-outline">İletişime Geç</a>
+    </div>
+
+    <!-- Chip Visual -->
+    <div class="chip-visual">
+        <div class="chip-ring"></div>
+        <div class="chip-ring chip-ring2"></div>
+        <div class="chip-core">
+            <div class="chip-label">NPU<br>IP</div>
+        </div>
+        <div class="chip-pin top" style="left:70px;top:18px;"></div>
+        <div class="chip-pin top" style="left:86px;top:18px;"></div>
+        <div class="chip-pin top" style="left:102px;top:18px;"></div>
+        <div class="chip-pin top" style="left:118px;top:18px;"></div>
+        <div class="chip-pin bottom" style="left:70px;bottom:18px;"></div>
+        <div class="chip-pin bottom" style="left:86px;bottom:18px;"></div>
+        <div class="chip-pin bottom" style="left:102px;bottom:18px;"></div>
+        <div class="chip-pin bottom" style="left:118px;bottom:18px;"></div>
+        <div class="chip-pin left" style="top:70px;left:18px;"></div>
+        <div class="chip-pin left" style="top:86px;left:18px;"></div>
+        <div class="chip-pin left" style="top:102px;left:18px;"></div>
+        <div class="chip-pin left" style="top:118px;left:18px;"></div>
+        <div class="chip-pin right" style="top:70px;right:18px;"></div>
+        <div class="chip-pin right" style="top:86px;right:18px;"></div>
+        <div class="chip-pin right" style="top:102px;right:18px;"></div>
+        <div class="chip-pin right" style="top:118px;right:18px;"></div>
     </div>
 </header>
 
@@ -158,37 +223,22 @@
 <section id="sorun">
     <div class="section-tag">Problem</div>
     <h2 class="section-title">Neden Yeni Bir Çip Mimarisi?</h2>
-    <p class="section-sub">
-        Enerji kısıtlı otonom platformlar — İHA, akıllı mühimmat, taktik kara sistemleri —
-        mevcut GPU tabanlı YZ mimarilerinin çok ötesinde güç kısıtlarıyla karşı karşıyadır.
-    </p>
+    <p class="section-sub">Enerji kısıtlı otonom platformlar — İHA, akıllı mühimmat, taktik kara sistemleri — mevcut GPU tabanlı YZ mimarilerinin çok ötesinde güç kısıtlarıyla karşı karşıyadır.</p>
     <div class="problem-grid">
         <div class="problem-card red">
             <div class="problem-num">01</div>
             <h3>⚡ Güç Tüketimi Uçurumu</h3>
-            <p>
-                Mevcut kenar YZ işlemcileri 7–35 W aralığında güç tüketirken
-                İHA ve taktik platformlardaki operasyonel güç bütçesi yalnızca &lt;1–2 W düzeyindedir.
-                Bu yapısal uyumsuzluk gerçek zamanlı YZ çıkarımını imkânsız kılmaktadır.
-            </p>
+            <p>Mevcut kenar YZ işlemcileri 7–35 W aralığında güç tüketirken İHA ve taktik platformlardaki operasyonel güç bütçesi yalnızca &lt;1–2 W düzeyindedir. Bu yapısal uyumsuzluk gerçek zamanlı YZ çıkarımını imkânsız kılmaktadır.</p>
         </div>
         <div class="problem-card yellow">
             <div class="problem-num">02</div>
             <h3>🔒 Tedarik Zinciri Güvenliği</h3>
-            <p>
-                Piyasadaki kenar YZ modülleri yabancı menşelidir ve ihracat kısıtlamalarına
-                (EAR / FDPR) tabidir. Savunma uygulamalarında kullanımları kısıtlı ya da
-                yasaktır. Yerli donanım IP'si ve bağımsız doğrulanabilirlik mümkün değildir.
-            </p>
+            <p>Piyasadaki kenar YZ modülleri yabancı menşelidir ve ihracat kısıtlamalarına (EAR / FDPR) tabidir. Savunma uygulamalarında kullanımları kısıtlı ya da yasaktır. Yerli donanım IP'si ve bağımsız doğrulanabilirlik mümkün değildir.</p>
         </div>
         <div class="problem-card cyan">
             <div class="problem-num">03</div>
             <h3>🏭 Yerli PDK Boşluğu</h3>
-            <p>
-                Türkiye yarı iletken pazarı hızla büyümekte, ancak yerli nöromorfik IP ve PDK
-                geliştirme alanında kritik bir boşluk sürmektedir. Aralık 2024'te yürürlüğe
-                giren BIS kuralları açık kaynak EDA araç zinciri benimsemesini zorunlu kılmaktadır.
-            </p>
+            <p>Türkiye yarı iletken pazarı hızla büyümekte, ancak yerli nöromorfik IP ve PDK geliştirme alanında kritik bir boşluk sürmektedir. Aralık 2024'te yürürlüğe giren BIS kuralları açık kaynak EDA araç zinciri benimsemesini zorunlu kılmaktadır.</p>
         </div>
     </div>
 </section>
@@ -198,10 +248,68 @@
 <section id="teknoloji">
     <div class="section-tag">Teknoloji</div>
     <h2 class="section-title">Memristör Tabanlı Analog In-Memory Computing</h2>
-    <p class="section-sub">
-        Von Neumann darboğazını temel düzeyde ortadan kaldıran mimari: bellek ve hesaplama
-        aynı fiziksel katmanda birleştirilmiştir.
-    </p>
+    <p class="section-sub">Von Neumann darboğazını temel düzeyde ortadan kaldıran mimari: bellek ve hesaplama aynı fiziksel katmanda birleştirilmiştir.</p>
+
+    <!-- Crossbar Görsel -->
+    <div class="crossbar-wrap">
+        <svg class="crossbar-svg" width="220" height="220" viewBox="0 0 220 220">
+            <!-- Yatay teller -->
+            <line x1="30" y1="50"  x2="190" y2="50"  stroke="#00d4ff" stroke-width="1.5" opacity="0.6"/>
+            <line x1="30" y1="80"  x2="190" y2="80"  stroke="#00d4ff" stroke-width="1.5" opacity="0.6"/>
+            <line x1="30" y1="110" x2="190" y2="110" stroke="#00d4ff" stroke-width="1.5" opacity="0.6"/>
+            <line x1="30" y1="140" x2="190" y2="140" stroke="#00d4ff" stroke-width="1.5" opacity="0.6"/>
+            <line x1="30" y1="170" x2="190" y2="170" stroke="#00d4ff" stroke-width="1.5" opacity="0.6"/>
+            <!-- Dikey teller -->
+            <line x1="60"  y1="30" x2="60"  y2="190" stroke="#7c5cfc" stroke-width="1.5" opacity="0.6"/>
+            <line x1="90"  y1="30" x2="90"  y2="190" stroke="#7c5cfc" stroke-width="1.5" opacity="0.6"/>
+            <line x1="120" y1="30" x2="120" y2="190" stroke="#7c5cfc" stroke-width="1.5" opacity="0.6"/>
+            <line x1="150" y1="30" x2="150" y2="190" stroke="#7c5cfc" stroke-width="1.5" opacity="0.6"/>
+            <line x1="180" y1="30" x2="180" y2="190" stroke="#7c5cfc" stroke-width="1.5" opacity="0.6"/>
+            <!-- Memristör düğümler (farklı boyutlar = farklı ağırlıklar) -->
+            <circle cx="60"  cy="50"  r="5" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="90"  cy="50"  r="3" fill="#00d4ff" opacity="0.5"/>
+            <circle cx="120" cy="50"  r="6" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="150" cy="50"  r="2" fill="#00d4ff" opacity="0.4"/>
+            <circle cx="180" cy="50"  r="4" fill="#00d4ff" opacity="0.7"/>
+            <circle cx="60"  cy="80"  r="3" fill="#00d4ff" opacity="0.5"/>
+            <circle cx="90"  cy="80"  r="6" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="120" cy="80"  r="4" fill="#00d4ff" opacity="0.7"/>
+            <circle cx="150" cy="80"  r="5" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="180" cy="80"  r="2" fill="#00d4ff" opacity="0.4"/>
+            <circle cx="60"  cy="110" r="6" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="90"  cy="110" r="2" fill="#00d4ff" opacity="0.4"/>
+            <circle cx="120" cy="110" r="5" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="150" cy="110" r="3" fill="#00d4ff" opacity="0.5"/>
+            <circle cx="180" cy="110" r="6" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="60"  cy="140" r="4" fill="#00d4ff" opacity="0.7"/>
+            <circle cx="90"  cy="140" r="5" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="120" cy="140" r="2" fill="#00d4ff" opacity="0.4"/>
+            <circle cx="150" cy="140" r="6" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="180" cy="140" r="3" fill="#00d4ff" opacity="0.5"/>
+            <circle cx="60"  cy="170" r="2" fill="#00d4ff" opacity="0.4"/>
+            <circle cx="90"  cy="170" r="4" fill="#00d4ff" opacity="0.7"/>
+            <circle cx="120" cy="170" r="3" fill="#00d4ff" opacity="0.5"/>
+            <circle cx="150" cy="170" r="5" fill="#00d4ff" opacity="0.9"/>
+            <circle cx="180" cy="170" r="6" fill="#00d4ff" opacity="0.9"/>
+            <!-- Etiketler -->
+            <text x="110" y="210" fill="#8b949e" font-size="9" text-anchor="middle" font-family="monospace">Memristör Crossbar Dizisi</text>
+            <text x="15" y="53"  fill="#00d4ff" font-size="8" text-anchor="middle" font-family="monospace">V₁</text>
+            <text x="15" y="83"  fill="#00d4ff" font-size="8" text-anchor="middle" font-family="monospace">V₂</text>
+            <text x="15" y="113" fill="#00d4ff" font-size="8" text-anchor="middle" font-family="monospace">V₃</text>
+            <text x="15" y="143" fill="#00d4ff" font-size="8" text-anchor="middle" font-family="monospace">V₄</text>
+            <text x="15" y="173" fill="#00d4ff" font-size="8" text-anchor="middle" font-family="monospace">V₅</text>
+        </svg>
+        <div class="crossbar-info">
+            <h3>Crossbar: Fiziksel Hesaplama</h3>
+            <p>Memristör crossbar dizisinde her kesişim noktası bir sinir ağı ağırlığını fiziksel iletkenlik olarak saklar. Giriş voltajları uygulandığında Ohm ve Kirchhoff yasaları gereği sütun akımları otomatik olarak matris-vektör çarpımını (MVM) gerçekleştirir.</p>
+            <p>Herhangi bir dijital hesaplama veya veri transferi olmaksızın, fiziksel yasalar doğrudan yapay zeka çıkarımını gerçekleştirir.</p>
+            <div class="formula">
+                I_j = Σ G_ij · V_i<br>
+                <span style="color:#8b949e; font-size:0.75rem;">G: İletkenlik (Ağırlık) · V: Giriş · I: MVM Çıkışı</span>
+            </div>
+        </div>
+    </div>
+
     <div class="tech-grid">
         <div class="tech-card">
             <div class="tech-icon">🔬</div>
@@ -221,7 +329,7 @@
         <div class="tech-card">
             <div class="tech-icon">📐</div>
             <h3>Açık Kaynak PDK</h3>
-            <p>OpenROAD, Magic, Ngspice araç zinciri ile FDPR riskini yapısal düzeyde minimize eden bağımsız PDK. 65 nm proses uyumlu, yabancı bağımlılığı sıfır.</p>
+            <p>OpenROAD, Magic, Ngspice araç zinciri ile bağımsız PDK. 65 nm proses uyumlu, yabancı bağımlılığı sıfır.</p>
         </div>
         <div class="tech-card">
             <div class="tech-icon">🛡️</div>
@@ -246,12 +354,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Çözüm</th>
-                    <th>Menşe</th>
-                    <th>Güç Tüketimi</th>
-                    <th>İhracat Kısıtı</th>
-                    <th>Yerli IP</th>
-                    <th>Savunma Uyumu</th>
+                    <th>Çözüm</th><th>Menşe</th><th>Güç Tüketimi</th><th>İhracat Kısıtı</th><th>Yerli IP</th><th>Savunma Uyumu</th>
                 </tr>
             </thead>
             <tbody>
@@ -281,7 +384,7 @@
                 </tr>
                 <tr>
                     <td>Yabancı Menşeli Kenar NPU-A</td>
-                    <td>🇮🇱 Yabancı</td>
+                    <td>Yabancı</td>
                     <td class="bad">2–3 W</td>
                     <td class="bad">FDPR kısıtlı</td>
                     <td class="bad">✗</td>
@@ -296,8 +399,8 @@
                     <td class="bad">✗ Yasak</td>
                 </tr>
                 <tr>
-                    <td>Yabancı Menşeli Nöromorfik İşlemci</td>
-                    <td>🇦🇺 Yabancı</td>
+                    <td>Yabancı Menşeli Nöromorfik</td>
+                    <td>Yabancı</td>
                     <td>~1 W</td>
                     <td class="bad">FDPR riski</td>
                     <td class="bad">✗</td>
@@ -333,7 +436,7 @@
         <div class="market-card">
             <h3>🏆 Nöromorfik Pazar</h3>
             <div class="big">%24 CAGR</div>
-            <p>Nöromorfik chip pazarı en hızlı büyüyen segment; savunma ve otonom sistemler öncü uygulama alanı</p>
+            <p>En hızlı büyüyen chip segmenti; savunma ve otonom sistemler öncü uygulama alanı</p>
         </div>
     </div>
 </section>
@@ -347,26 +450,26 @@
     <div class="programs-grid">
         <div class="prog-card">
             <div class="prog-logo">🔬</div>
-            <h3>TÜBİTAK BİGG</h3>
-            <p>1512 Girişimcilik Aşama-1 programı. Memristör tabanlı NPU IP ve PDK geliştirme için teknoloji doğrulama desteği.</p>
+            <h3>Girişimcilik Aşama-1</h3>
+            <p>Memristör tabanlı NPU IP ve PDK geliştirme için teknoloji doğrulama desteği.</p>
             <span class="prog-badge">Başvuruda</span>
         </div>
         <div class="prog-card">
             <div class="prog-logo">✈️</div>
             <h3>Havacılık &amp; Uzay Hızlandırma</h3>
-            <p>Yerli havacılık ve uzay teknolojileri ekosistemi. İHA ve otonom sistem uygulamaları için teknoloji geliştirme programı.</p>
+            <p>Yerli havacılık ve uzay teknolojileri ekosistemi. İHA ve otonom sistem uygulamaları.</p>
             <span class="prog-badge">Başvuruda</span>
         </div>
         <div class="prog-card">
             <div class="prog-logo">🛡️</div>
             <h3>Savunma Sanayii İnovasyon</h3>
-            <p>Savunma elektroniği inovasyon programı. Taktik sistemler için yerli NPU geliştirme ve entegrasyon desteği.</p>
+            <p>Savunma elektroniği inovasyon programı. Taktik sistemler için yerli NPU geliştirme.</p>
             <span class="prog-badge">Başvuruda</span>
         </div>
         <div class="prog-card">
             <div class="prog-logo">🏛️</div>
             <h3>Yerli PDK Geliştirme</h3>
-            <p>65 nm yerli proses tasarım kiti iş birliği. Açık kaynak EDA araç zinciri (OpenROAD, Magic, Ngspice) entegrasyonu.</p>
+            <p>65 nm yerli proses tasarım kiti iş birliği. OpenROAD, Magic, Ngspice entegrasyonu.</p>
             <span class="prog-badge">Görüşmede</span>
         </div>
     </div>
@@ -383,17 +486,13 @@
         <div class="team-info">
             <h3>Dr. Fatih Gül</h3>
             <div class="role">Kurucu &amp; CEO — Elektrik-Elektronik Mühendisliği</div>
-            <p>
-                Memristör tabanlı donanım hızlandırıcılar, TiO₂/ZnO/HfO₂ ince film memristörler,
-                CMOS VLSI ve nöromorfik hesaplama alanlarında yayınları bulunan araştırmacı.
-                TÜBİTAK 121E544 projesi yürütücüsü.
-            </p>
+            <p>Memristör tabanlı donanım hızlandırıcılar, TiO₂/ZnO/HfO₂ ince film memristörler, CMOS VLSI ve nöromorfik hesaplama alanlarında yayınları bulunan araştırmacı.</p>
             <div class="tag-list">
                 <span class="tag">Memristör</span>
                 <span class="tag">CMOS VLSI</span>
                 <span class="tag">Nöromorfik</span>
                 <span class="tag">PDK</span>
-                <span class="tag">TÜBİTAK 121E544</span>
+                <span class="tag">In-Memory Computing</span>
             </div>
         </div>
     </div>
@@ -404,10 +503,7 @@
 <section id="iletisim">
     <div class="contact-box">
         <h2>Birlikte Çalışalım</h2>
-        <p>
-            Savunma, havacılık ve kenar YZ paydaşları için teknik brifing,
-            IP lisanslama görüşmesi veya PDK iş birliği talepleriniz için ulaşın.
-        </p>
+        <p>Savunma, havacılık ve kenar YZ paydaşları için teknik brifing, IP lisanslama görüşmesi veya PDK iş birliği talepleriniz için ulaşın.</p>
         <div class="contact-links">
             <a class="contact-link" href="https://github.com/e-coldtech/MemRSyS" target="_blank">⬡ GitHub</a>
             <a class="contact-link" href="mailto:info@memrsys.com">✉ info@memrsys.com</a>
@@ -417,9 +513,12 @@
 </section>
 
 <footer>
-    <span class="logo">MemRSyS</span>
+    <div>
+        <span class="logo">MemRSyS</span>
+        <div class="footer-motto">Intelligence at the Edge</div>
+    </div>
     <p>&copy; 2026 MemRSyS Technologies</p>
-    <p style="color:#444; font-size:0.75rem;">TÜBİTAK BİGG · Havacılık &amp; Uzay · Savunma Sanayii</p>
+    <p style="color:#444; font-size:0.73rem;">Havacılık &amp; Uzay · Savunma Sanayii · Edge AI</p>
 </footer>
 
 </body>
