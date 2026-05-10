@@ -20,8 +20,8 @@
 
         /* HERO */
         header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle at 50% 40%, #0d2035 0%, #0a0e14 70%); text-align: center; padding: 100px 20px 60px; }
-        header img.hero-logo { width: min(420px, 80vw); margin-bottom: 32px; }
-        header h2 { font-size: 1.05rem; color: #3a7a8a; letter-spacing: 2px; text-transform: none; margin-bottom: 20px; font-weight: 400; font-family: 'Share Tech Mono', 'Courier New', monospace; }
+        header img.hero-logo { width: min(560px, 88vw); margin-bottom: 24px; }
+        header h2 { font-size: 1.0rem !important; color: #3a7a8a !important; letter-spacing: 2px !important; text-transform: none !important; margin-bottom: 24px; font-weight: 400 !important; font-family: 'Share Tech Mono', 'Courier New', monospace !important; }
         header p { font-size: 1.1rem; max-width: 640px; color: #8a9ab0; margin-bottom: 40px; }
         .badges { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
         .badge { background: #0d1f35; border: 1px solid #1a3a55; border-radius: 6px; padding: 8px 18px; font-size: 0.85rem; color: #00d4ff; }
@@ -149,6 +149,107 @@
             YITAL hazır olduğunda anında fabrikasyon — <em>first-mover avantajı.</em></p>
         </div>
     </div>
+</section>
+
+<!-- KULLANIM ALANLARI -->
+<section id="usecases" style="background:#080c12; max-width:100%; padding:70px 20px;">
+  <div style="max-width:960px; margin:auto;">
+    <h2>Kullanım Senaryoları</h2>
+    <p class="lead">Savunma'dan endüstriyel otomasyona — güç kısıtlı her platforma.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>✈️ IHA / Aviyonik</h3>
+        <p>Gerçek zamanlı görüntü tanıma, nesne sınıflandırma ve sensör füzyonu. &lt;1W bütçesiyle IHA görev bilgisayarlarına entegre edilebilir.</p>
+      </div>
+      <div class="card">
+        <h3>🏭 Endüstriyel Görüntü İşleme</h3>
+        <p>Üretim hattı kalite kontrol, anomali tespiti ve gerçek zamanlı akış analizi. Bulut bağımlılığı sıfır.</p>
+      </div>
+      <div class="card">
+        <h3>🔐 Güvenlik & Gözetleme</h3>
+        <p>Kenar cihazında yüz tanıma ve hareket analizi. Veri merkezi gerektirmez, gecikme minimize.</p>
+      </div>
+      <div class="card">
+        <h3>🩺 Giyilebilir Medikal</h3>
+        <p>EEG / EMG sinyal işleme, kalp ritmi analizi. Pil ömrü kritik uygulamalar için idealdir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEKNİK KARŞILAŞTIRMA -->
+<section id="compare">
+    <h2>Rakip Karşılaştırması</h2>
+    <p class="lead">Neden MemRSyS? Güç, yerlilik ve açık ekosistem.</p>
+    <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+      <thead>
+        <tr style="background:#0d1f35; color:#00d4ff;">
+          <th style="padding:12px 16px; text-align:left;">Özellik</th>
+          <th style="padding:12px 16px;">Coral Edge TPU</th>
+          <th style="padding:12px 16px;">Hailo-8</th>
+          <th style="padding:12px 16px;">Intel Movidius</th>
+          <th style="padding:12px 16px; color:#00FFB2;">MemRSyS NPU</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #1a2a3a;">
+          <td style="padding:10px 16px; color:#a0b0c0;">Güç Tüketimi</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">2 W</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">2.5 W</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">1-2 W</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">&lt; 1 W</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a2a3a; background:#0a0f18;">
+          <td style="padding:10px 16px; color:#a0b0c0;">İhracat Kısıtı</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">EAR Kısıtlı</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">FDPR Riski</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">EAR Kısıtlı</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">Yok ✓</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a2a3a;">
+          <td style="padding:10px 16px; color:#a0b0c0;">Açık PDK</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">SKY130 ✓</td>
+        </tr>
+        <tr style="background:#0a0f18;">
+          <td style="padding:10px 16px; color:#a0b0c0;">Yerli Fab</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">YITAL 65nm ✓</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</section>
+
+<!-- YAYINLAR & BASIN -->
+<section id="press" style="background:#080c12; max-width:100%; padding:70px 20px;">
+  <div style="max-width:960px; margin:auto;">
+    <h2>Yayınlar & Akademik Temel</h2>
+    <p class="lead">TÜBİTAK 1001 (121E544) destekli Ar-Ge · 41 yayın · 16 WoS · h=9</p>
+    <div class="grid">
+      <div class="card">
+        <h3>IEEE Access 2024</h3>
+        <p>CMOS uyumlu HfO₂/TiO₂ memristör elektriksel karakterizasyonu — ON/OFF &gt;7000</p>
+      </div>
+      <div class="card">
+        <h3>Integration (VLSI J.) 2025</h3>
+        <p>Analog crossbar NPU devre tasarımı — SPICE doğrulaması</p>
+      </div>
+      <div class="card">
+        <h3>Neural Networks (Elsevier)</h3>
+        <p>Memristör tabanlı SNN çıkarım ve eğitim — nöromorfik hesaplama</p>
+      </div>
+      <div class="card">
+        <h3>Faydalı Model — TÜRKPATENT</h3>
+        <p>Araştırma raporu tamamlandı, buluş askıya çıkarıldı. IP koruması aktif.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
