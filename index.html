@@ -244,129 +244,221 @@
 </section>
 
 <!-- YOL HARİTASI -->
-<section id="roadmap" style="background:#080c12; max-width:100%; padding:70px 20px; position:relative; overflow:hidden;">
-  <svg style="position:absolute;top:0;right:0;width:400px;height:100%;opacity:0.03;pointer-events:none;" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="200" cy="300" r="280" fill="none" stroke="#00d4ff" stroke-width="1"/>
-    <circle cx="200" cy="300" r="200" fill="none" stroke="#7C5CFF" stroke-width="1"/>
-    <circle cx="200" cy="300" r="120" fill="none" stroke="#00FFB2" stroke-width="1"/>
-  </svg>
-  <div style="max-width:960px; margin:auto; position:relative;">
-    <h2>Yol Haritası</h2>
-    <p class="lead">Faz bazlı geliştirme — teknoloji olgunluğuna göre ilerleme.</p>
+<section id="roadmap" style="background:#080c12;max-width:100%;padding:80px 20px;position:relative;overflow:hidden;">
+<style>
+  @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px currentColor}50%{opacity:.6;box-shadow:0 0 20px currentColor}}
+  @keyframes bar{from{width:0}to{width:var(--w)}}
+  .rm-node{animation:pulse 2.5s ease-in-out infinite}
+  .rm-bar{animation:bar 1.4s cubic-bezier(.4,0,.2,1) forwards}
+  .rm-phase:hover{transform:translateY(-2px);transition:transform .2s}
+  .milestone{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #ffffff08;font-size:.84rem}
+  .milestone:last-child{border-bottom:none}
+  .ms-done{color:#00d4ff}.ms-prog{color:#7C5CFF}.ms-todo{color:#3a4a5a}
+  .trl-badge{font-family:'Share Tech Mono',monospace;font-size:.7rem;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:1px}
+</style>
 
-    <!-- Zaman çizgisi -->
-    <div style="position:relative; padding-left:32px;">
+<!-- Arka plan dekorasyon -->
+<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.025;pointer-events:none" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <line x1="0" y1="200" x2="1200" y2="200" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4 8"/>
+  <line x1="0" y1="400" x2="1200" y2="400" stroke="#7C5CFF" stroke-width="1" stroke-dasharray="4 8"/>
+  <line x1="0" y1="600" x2="1200" y2="600" stroke="#00FFB2" stroke-width="1" stroke-dasharray="4 8"/>
+  <circle cx="300" cy="400" r="180" fill="none" stroke="#00d4ff" stroke-width="1"/>
+  <circle cx="900" cy="400" r="220" fill="none" stroke="#7C5CFF" stroke-width="1"/>
+</svg>
 
-      <!-- Dikey çizgi -->
-      <div style="position:absolute;left:12px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,#00d4ff,#7C5CFF,#00FFB2,#C9972A);border-radius:2px;"></div>
-
-      <!-- FAZ 1 -->
-      <div style="position:relative; margin-bottom:40px;">
-        <div style="position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;background:#00d4ff;box-shadow:0 0 10px #00d4ff;"></div>
-        <div style="background:#10171f;border:1px solid #1a3a55;border-left:3px solid #00d4ff;border-radius:8px;padding:20px 24px;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="background:#00d4ff22;color:#00d4ff;font-size:0.75rem;font-family:'Share Tech Mono',monospace;padding:3px 10px;border-radius:4px;border:1px solid #00d4ff44;">FAZ 1 — AKTİF</span>
-            <span style="color:#00d4ff;font-weight:bold;">IP Tasarımı &amp; Doğrulama</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px;">
-            <div style="color:#8a9ab0;font-size:0.9rem;">✅ Verilog-A memristör modeli</div>
-            <div style="color:#8a9ab0;font-size:0.9rem;">✅ SKY130 crossbar simülasyonu</div>
-            <div style="color:#8a9ab0;font-size:0.9rem;">✅ SPICE %90+ doğrulama</div>
-            <div style="color:#8a9ab0;font-size:0.9rem;">🔄 RTL/HDL IP geliştirme</div>
-            <div style="color:#8a9ab0;font-size:0.9rem;">🔄 FPGA CNN+SNN prototip</div>
-            <div style="color:#8a9ab0;font-size:0.9rem;">🔄 OpenLane sentez akışı</div>
-          </div>
-          <div style="margin-top:14px;font-size:0.82rem;color:#3a7a8a;font-family:'Share Tech Mono',monospace;">Çıktı: Doğrulanmış, YITAL'a aktarıma hazır IP blokları</div>
-        </div>
-      </div>
-
-      <!-- FAZ 2 -->
-      <div style="position:relative; margin-bottom:40px;">
-        <div style="position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;background:#7C5CFF;box-shadow:0 0 10px #7C5CFF;opacity:0.7;"></div>
-        <div style="background:#10171f;border:1px solid #2a1a4a;border-left:3px solid #7C5CFF;border-radius:8px;padding:20px 24px;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="background:#7C5CFF22;color:#7C5CFF;font-size:0.75rem;font-family:'Share Tech Mono',monospace;padding:3px 10px;border-radius:4px;border:1px solid #7C5CFF44;">FAZ 2</span>
-            <span style="color:#7C5CFF;font-weight:bold;">Tape-out &amp; Patent</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px;">
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ SKY130 MPW tape-out</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ TÜRKPATENT başvurusu</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ TRL 3-4 doğrulaması</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ IP blok kütüphanesi</div>
-          </div>
-          <div style="margin-top:14px;font-size:0.82rem;color:#3a2a5a;font-family:'Share Tech Mono',monospace;">Çıktı: Tescilli NPU IP + fiziksel doğrulanmış çip topolojisi</div>
-        </div>
-      </div>
-
-      <!-- FAZ 3 -->
-      <div style="position:relative; margin-bottom:40px;">
-        <div style="position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;background:#00FFB2;box-shadow:0 0 10px #00FFB2;opacity:0.5;"></div>
-        <div style="background:#10171f;border:1px solid #1a3a2a;border-left:3px solid #00FFB2;border-radius:8px;padding:20px 24px;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="background:#00FFB222;color:#00FFB2;font-size:0.75rem;font-family:'Share Tech Mono',monospace;padding:3px 10px;border-radius:4px;border:1px solid #00FFB244;">FAZ 3</span>
-            <span style="color:#00FFB2;font-weight:bold;">Lisanslama &amp; Ticarileşme</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px;">
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ NRE anlaşmaları (Savunma OEM)</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ IP royalty sözleşmeleri</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ Şirket kuruluşu (spin-off)</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ PDK kütüphane lisansı</div>
-          </div>
-          <div style="margin-top:14px;font-size:0.82rem;color:#1a4a3a;font-family:'Share Tech Mono',monospace;">Çıktı: İlk NRE gelirleri · Spin-off kurulumu · Yatırım hazırlığı</div>
-        </div>
-      </div>
-
-      <!-- FAZ 4 -->
-      <div style="position:relative; margin-bottom:40px;">
-        <div style="position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;background:#C9972A;box-shadow:0 0 10px #C9972A;opacity:0.4;"></div>
-        <div style="background:#10171f;border:1px solid #3a2a1a;border-left:3px solid #C9972A;border-radius:8px;padding:20px 24px;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="background:#C9972A22;color:#C9972A;font-size:0.75rem;font-family:'Share Tech Mono',monospace;padding:3px 10px;border-radius:4px;border:1px solid #C9972A44;">FAZ 4</span>
-            <span style="color:#C9972A;font-weight:bold;">YITAL 65nm Fabrikasyon &amp; Ölçeklendirme</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px;">
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ YITAL 65nm CMOS tape-out</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ Monolitik NPU ASIC üretimi</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ RISC-V AXI4 arayüz entegrasyonu</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ Seri üretim lisansı</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ TRL 5+ · İhracat hazırlığı</div>
-            <div style="color:#6a6a8a;font-size:0.9rem;">⬜ OEM müşteri teslimatları</div>
-          </div>
-          <div style="margin-top:14px;font-size:0.82rem;color:#4a3a1a;font-family:'Share Tech Mono',monospace;">Çıktı: Türkiye'nin ilk yerli NPU ASIC'i · YITAL first-mover · Seri üretim</div>
-        </div>
-      </div>
-
-      <!-- 5 YILLIK VİZYON -->
-      <div style="position:relative;">
-        <div style="position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#00FFB2,#7C5CFF);box-shadow:0 0 16px #7C5CFF;opacity:0.5;"></div>
-        <div style="background:linear-gradient(135deg,#0d1a2a,#1a0d2a);border:1px solid #2a2a4a;border-left:3px solid #7C5CFF;border-radius:8px;padding:24px;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-            <span style="background:#ffffff11;color:#e0e0ff;font-size:0.75rem;font-family:'Share Tech Mono',monospace;padding:3px 10px;border-radius:4px;border:1px solid #ffffff22;">5 YILLIK VİZYON</span>
-            <span style="color:#e0e0ff;font-weight:bold;">Yerli Çip Ekosistemi</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
-            <div style="background:#ffffff08;border-radius:8px;padding:16px;">
-              <div style="color:#00d4ff;font-weight:bold;margin-bottom:8px;font-size:0.95rem;">🔬 CMOS Uyumlu IP Portföyü</div>
-              <p style="color:#8a9ab0;font-size:0.88rem;line-height:1.6;">Metal-oksit memristör teknolojisi üzerinde CMOS standart üretim süreciyle tam uyumlu, lisanslanabilir IP çekirdekleri ailesi. Analog ve dijital karma sinyal tasarımı.</p>
-            </div>
-            <div style="background:#ffffff08;border-radius:8px;padding:16px;">
-              <div style="color:#7C5CFF;font-weight:bold;margin-bottom:8px;font-size:0.95rem;">⚙️ RISC-V Ekosistemi Entegrasyonu</div>
-              <p style="color:#8a9ab0;font-size:0.88rem;line-height:1.6;">NPU IP çekirdeğinin RISC-V açık ISA ile AXI4 arayüzü üzerinden tam entegrasyonu. SoC düzeyinde yerli işlemci + NPU kombinasyonu hedefi.</p>
-            </div>
-            <div style="background:#ffffff08;border-radius:8px;padding:16px;">
-              <div style="color:#00FFB2;font-weight:bold;margin-bottom:8px;font-size:0.95rem;">🏭 YITAL 65nm PDK Geliştirme</div>
-              <p style="color:#8a9ab0;font-size:0.88rem;line-height:1.6;">TÜBİTAK YITAL 65nm CMOS fab süreci için memristör hücre PDK kütüphanesi. Türkiye'nin yerli foundry'inde üretilebilir ilk nöromorfik IP seti.</p>
-            </div>
-            <div style="background:#ffffff08;border-radius:8px;padding:16px;">
-              <div style="color:#C9972A;font-weight:bold;margin-bottom:8px;font-size:0.95rem;">🌍 Küresel IP Lisanslama</div>
-              <p style="color:#8a9ab0;font-size:0.88rem;line-height:1.6;">EAR/FDPR kısıtından bağımsız, savunma sanayii uyumlu yerli IP'in Müttefik ülkeler ve AB pazarına ihracat lisansı. Per-chip royalty modeli.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+<div style="max-width:1040px;margin:auto;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:48px">
+    <div>
+      <h2 style="margin-bottom:8px">Technology Roadmap</h2>
+      <p style="color:#607d8b;font-family:'Share Tech Mono',monospace;font-size:.85rem;margin:0">milestone-driven · technology-gated · fab-ready</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <span style="font-size:.75rem;padding:4px 12px;border-radius:4px;background:#00d4ff18;color:#00d4ff;border:1px solid #00d4ff33;font-family:'Share Tech Mono',monospace">● ACTIVE</span>
+      <span style="font-size:.75rem;padding:4px 12px;border-radius:4px;background:#7C5CFF18;color:#7C5CFF;border:1px solid #7C5CFF33;font-family:'Share Tech Mono',monospace">○ PLANNED</span>
+      <span style="font-size:.75rem;padding:4px 12px;border-radius:4px;background:#ffffff0a;color:#4a5a6a;border:1px solid #ffffff14;font-family:'Share Tech Mono',monospace">◌ FUTURE</span>
     </div>
   </div>
+
+  <!-- Yatay progress şerit -->
+  <div style="position:relative;margin-bottom:48px">
+    <div style="height:3px;background:#1a2a3a;border-radius:2px;position:relative;overflow:visible">
+      <div style="--w:28%;position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,#00d4ff,#00a0c0);border-radius:2px" class="rm-bar"></div>
+      <!-- milestone noktaları -->
+      <div style="position:absolute;left:0%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#00d4ff;border:2px solid #080c12" class="rm-node" style="color:#00d4ff"></div>
+      <div style="position:absolute;left:28%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#00d4ff;border:2px solid #080c12;box-shadow:0 0 8px #00d4ff"></div>
+      <div style="position:absolute;left:52%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#1a2a3a;border:2px solid #7C5CFF"></div>
+      <div style="position:absolute;left:76%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#1a2a3a;border:2px solid #00FFB2"></div>
+      <div style="position:absolute;left:100%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#1a2a3a;border:2px solid #C9972A"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:.7rem;color:#3a5a6a">
+      <span>TRL 1-2</span><span style="color:#00d4ff">TRL 3 ▶</span><span>TRL 4</span><span>TRL 5</span><span>TRL 6+</span>
+    </div>
+  </div>
+
+  <!-- Faz kartları — 2 sütun grid -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:20px;margin-bottom:20px">
+
+    <!-- FAZ 1 -->
+    <div class="rm-phase" style="background:#0d1520;border:1px solid #1a3a55;border-radius:12px;padding:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#00d4ff,#0080a0)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <div>
+          <div style="font-family:'Share Tech Mono',monospace;color:#00d4ff;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 01</div>
+          <div style="font-size:1.05rem;font-weight:700;color:#e0f0ff">IP Tasarımı &amp; Doğrulama</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <span class="trl-badge" style="color:#00d4ff;border-color:#00d4ff33">TRL 2-3</span>
+          <span style="font-size:.7rem;padding:2px 8px;border-radius:3px;background:#00d4ff18;color:#00d4ff;font-family:'Share Tech Mono',monospace">● ACTIVE</span>
+        </div>
+      </div>
+      <!-- Progress bar -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#607d8b;margin-bottom:4px"><span>İlerleme</span><span style="color:#00d4ff">~50%</span></div>
+        <div style="height:4px;background:#1a2a3a;border-radius:2px;overflow:hidden">
+          <div style="--w:50%;height:100%;background:linear-gradient(90deg,#00d4ff,#0080a0);border-radius:2px" class="rm-bar"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+        <div class="milestone ms-done">✓ Verilog-A memristör modeli</div>
+        <div class="milestone ms-done">✓ SKY130 crossbar simülasyonu</div>
+        <div class="milestone ms-done">✓ SPICE &gt;%90 doğrulama</div>
+        <div class="milestone ms-done">✓ Fabrikasyon karakterizasyonu</div>
+        <div class="milestone ms-prog">◎ RTL/HDL IP geliştirme</div>
+        <div class="milestone ms-prog">◎ FPGA CNN+SNN prototip</div>
+        <div class="milestone ms-prog">◎ OpenLane sentez akışı</div>
+        <div class="milestone ms-todo">○ IP blok kütüphanesi</div>
+      </div>
+      <div style="margin-top:14px;padding:10px;background:#00d4ff08;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#3a8a9a">
+        → YITAL'a aktarıma hazır doğrulanmış IP blokları
+      </div>
+    </div>
+
+    <!-- FAZ 2 -->
+    <div class="rm-phase" style="background:#0d1020;border:1px solid #2a1a4a;border-radius:12px;padding:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#7C5CFF,#5a3acc)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <div>
+          <div style="font-family:'Share Tech Mono',monospace;color:#7C5CFF;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 02</div>
+          <div style="font-size:1.05rem;font-weight:700;color:#e0e0ff">Tape-out &amp; Patent</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <span class="trl-badge" style="color:#7C5CFF;border-color:#7C5CFF33">TRL 3-4</span>
+          <span style="font-size:.7rem;padding:2px 8px;border-radius:3px;background:#7C5CFF18;color:#7C5CFF;font-family:'Share Tech Mono',monospace">○ PLANNED</span>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#607d8b;margin-bottom:4px"><span>İlerleme</span><span style="color:#4a4a8a">0%</span></div>
+        <div style="height:4px;background:#1a2a3a;border-radius:2px"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+        <div class="milestone ms-todo">○ SKY130 MPW tape-out</div>
+        <div class="milestone ms-todo">○ TÜRKPATENT NPU topolojisi</div>
+        <div class="milestone ms-todo">○ TRL 3-4 doğrulaması</div>
+        <div class="milestone ms-todo">○ IP blok kütüphanesi v1</div>
+        <div class="milestone ms-todo">○ Analog/dijital karma test</div>
+        <div class="milestone ms-todo">○ CMOS uyumluluk raporu</div>
+      </div>
+      <div style="margin-top:14px;padding:10px;background:#7C5CFF08;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#4a3a7a">
+        → Tescilli NPU IP · Fiziksel doğrulanmış çip topolojisi
+      </div>
+    </div>
+
+    <!-- FAZ 3 -->
+    <div class="rm-phase" style="background:#08140f;border:1px solid #1a3a25;border-radius:12px;padding:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#00FFB2,#00aa77)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <div>
+          <div style="font-family:'Share Tech Mono',monospace;color:#00FFB2;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 03</div>
+          <div style="font-size:1.05rem;font-weight:700;color:#e0ffe8">Lisanslama &amp; Ticarileşme</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <span class="trl-badge" style="color:#00FFB2;border-color:#00FFB233">TRL 4-5</span>
+          <span style="font-size:.7rem;padding:2px 8px;border-radius:3px;background:#ffffff0a;color:#3a5a4a;font-family:'Share Tech Mono',monospace">◌ FUTURE</span>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#607d8b;margin-bottom:4px"><span>İlerleme</span><span style="color:#2a5a3a">0%</span></div>
+        <div style="height:4px;background:#1a2a3a;border-radius:2px"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+        <div class="milestone ms-todo">○ NRE anlaşmaları (Savunma OEM)</div>
+        <div class="milestone ms-todo">○ IP royalty sözleşmeleri</div>
+        <div class="milestone ms-todo">○ Spin-off kurulumu</div>
+        <div class="milestone ms-todo">○ PDK kütüphane lisansı</div>
+        <div class="milestone ms-todo">○ RISC-V AXI4 entegrasyon</div>
+        <div class="milestone ms-todo">○ İlk OEM müşteri teslimatı</div>
+      </div>
+      <div style="margin-top:14px;padding:10px;background:#00FFB208;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#1a5a3a">
+        → İlk NRE gelirleri · Spin-off · IP royalty modeli aktif
+      </div>
+    </div>
+
+    <!-- FAZ 4 -->
+    <div class="rm-phase" style="background:#130e08;border:1px solid #3a2a10;border-radius:12px;padding:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#C9972A,#8a6010)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <div>
+          <div style="font-family:'Share Tech Mono',monospace;color:#C9972A;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 04</div>
+          <div style="font-size:1.05rem;font-weight:700;color:#fff0d0">YITAL 65nm &amp; Ölçeklendirme</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <span class="trl-badge" style="color:#C9972A;border-color:#C9972A33">TRL 5-7</span>
+          <span style="font-size:.7rem;padding:2px 8px;border-radius:3px;background:#ffffff0a;color:#4a3a1a;font-family:'Share Tech Mono',monospace">◌ FUTURE</span>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#607d8b;margin-bottom:4px"><span>İlerleme</span><span style="color:#4a3a1a">0%</span></div>
+        <div style="height:4px;background:#1a2a3a;border-radius:2px"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+        <div class="milestone ms-todo">○ YITAL 65nm CMOS tape-out</div>
+        <div class="milestone ms-todo">○ Monolitik NPU ASIC üretimi</div>
+        <div class="milestone ms-todo">○ 65nm PDK kütüphanesi</div>
+        <div class="milestone ms-todo">○ Seri üretim lisansı</div>
+        <div class="milestone ms-todo">○ CMOS IP portföy genişletme</div>
+        <div class="milestone ms-todo">○ TRL 6+ · İhracat</div>
+      </div>
+      <div style="margin-top:14px;padding:10px;background:#C9972A08;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#5a4a1a">
+        → Türkiye'nin ilk yerli NPU ASIC'i · First-mover · Seri üretim
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 YILLIK VİZYON -->
+  <div style="background:linear-gradient(135deg,#0a1525 0%,#150a25 50%,#0a1520 100%);border:1px solid #2a2a4a;border-radius:12px;padding:32px;position:relative;overflow:hidden">
+    <div style="position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,#00d4ff,#7C5CFF,#00FFB2,#C9972A)"></div>
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap">
+      <div>
+        <span style="font-family:'Share Tech Mono',monospace;color:#6a6aaa;font-size:.72rem;letter-spacing:2px;display:block;margin-bottom:4px">5-YEAR VISION</span>
+        <span style="font-size:1.1rem;font-weight:700;color:#c8c8ff">Yerli Çip Ekosistemi</span>
+      </div>
+      <span style="margin-left:auto;font-size:.75rem;padding:4px 14px;border-radius:4px;background:#ffffff08;color:#6a6aaa;border:1px solid #ffffff14;font-family:'Share Tech Mono',monospace">CMOS · RISC-V · YITAL · IP</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
+      <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
+        <div style="width:32px;height:32px;border-radius:8px;background:#00d4ff18;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">🔬</div>
+        <div style="color:#00d4ff;font-weight:600;font-size:.9rem;margin-bottom:6px">CMOS Uyumlu IP Portföyü</div>
+        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">Standart üretim süreciyle tam uyumlu, lisanslanabilir memristör IP ailesi. Analog + dijital karma sinyal.</p>
+      </div>
+      <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
+        <div style="width:32px;height:32px;border-radius:8px;background:#7C5CFF18;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">⚙️</div>
+        <div style="color:#7C5CFF;font-weight:600;font-size:.9rem;margin-bottom:6px">RISC-V AXI4 Entegrasyonu</div>
+        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">NPU IP çekirdeğinin açık ISA ile tam entegrasyonu. SoC düzeyinde yerli işlemci + NPU hedefi.</p>
+      </div>
+      <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
+        <div style="width:32px;height:32px;border-radius:8px;background:#00FFB218;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">🏭</div>
+        <div style="color:#00FFB2;font-weight:600;font-size:.9rem;margin-bottom:6px">YITAL 65nm PDK</div>
+        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">TÜBİTAK YITAL 65nm fab için memristör hücre PDK kütüphanesi. Yerli foundry ile üretim.</p>
+      </div>
+      <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
+        <div style="width:32px;height:32px;border-radius:8px;background:#C9972A18;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">🌍</div>
+        <div style="color:#C9972A;font-weight:600;font-size:.9rem;margin-bottom:6px">Küresel IP Lisanslama</div>
+        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">EAR/FDPR bağımsız yerli IP. Müttefik ülkeler ve AB pazarına ihracat. Per-chip royalty modeli.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
 </section>
 
 <!-- YAYINLAR & AKADEMİK TEMEL -->
