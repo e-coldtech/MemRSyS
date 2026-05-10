@@ -3,50 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MemRSys | Edge AI Acceleration</title>
+    <title>MemRSyS | Intelligence at the Edge</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a0e14; color: #e0e0e0; margin: 0; line-height: 1.6; }
-        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, #1a2a3a 0%, #0a0e14 100%); text-align: center; }
-        h1 { font-size: 4rem; margin-bottom: 10px; letter-spacing: 2px; color: #00d4ff; }
-        p { font-size: 1.2rem; max-width: 600px; color: #a0a0a0; }
-        .cta-button { margin-top: 30px; padding: 12px 30px; background-color: #00d4ff; color: #0a0e14; text-decoration: none; font-weight: bold; border-radius: 5px; transition: 0.3s; }
-        .cta-button:hover { background-color: #008fb3; }
-        section { padding: 80px 20px; max-width: 900px; margin: auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
-        .card { background: #161b22; padding: 20px; border-radius: 8px; border: 1px solid #30363d; }
-        .card h3 { color: #00d4ff; }
-        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #555; border-top: 1px solid #30363d; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a0e14; color: #e0e0e0; line-height: 1.6; }
+
+        /* NAV */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(10,14,20,0.95); backdrop-filter: blur(8px); padding: 12px 40px; display: flex; align-items: center; justify-content: space-between; z-index: 100; border-bottom: 1px solid #1a2a3a; }
+        nav img.nav-logo { height: 36px; }
+        nav ul { list-style: none; display: flex; gap: 28px; }
+        nav ul a { color: #a0b0c0; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        nav ul a:hover { color: #00d4ff; }
+
+        /* HERO */
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle at 50% 40%, #0d2035 0%, #0a0e14 70%); text-align: center; padding: 100px 20px 60px; }
+        header img.hero-logo { width: min(420px, 80vw); margin-bottom: 32px; }
+        header h2 { font-size: 1.25rem; color: #607d8b; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; font-weight: 400; }
+        header p { font-size: 1.1rem; max-width: 640px; color: #8a9ab0; margin-bottom: 40px; }
+        .badges { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+        .badge { background: #0d1f35; border: 1px solid #1a3a55; border-radius: 6px; padding: 8px 18px; font-size: 0.85rem; color: #00d4ff; }
+        .badge span { color: #607d8b; }
+        .cta-button { padding: 14px 36px; background-color: #00d4ff; color: #0a0e14; text-decoration: none; font-weight: bold; border-radius: 6px; transition: background 0.2s; font-size: 1rem; }
+        .cta-button:hover { background-color: #00a8cc; }
+
+        /* SECTIONS */
+        section { padding: 80px 20px; max-width: 960px; margin: auto; }
+        section h2 { font-size: 1.8rem; color: #00d4ff; margin-bottom: 12px; }
+        section p.lead { color: #8a9ab0; margin-bottom: 40px; max-width: 640px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: #10171f; padding: 24px; border-radius: 10px; border: 1px solid #1a2a3a; }
+        .card h3 { color: #00d4ff; margin-bottom: 10px; font-size: 1.05rem; }
+        .card p { color: #8a9ab0; font-size: 0.9rem; }
+        .card .metric { font-size: 2rem; font-weight: bold; color: #00d4ff; margin-bottom: 4px; }
+
+        /* DIVIDER */
+        .divider { border: none; border-top: 1px solid #1a2a3a; margin: 0; }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #3a5060; border-top: 1px solid #1a2a3a; }
+        footer img { height: 28px; margin-bottom: 12px; opacity: 0.6; }
     </style>
 </head>
 <body>
 
+<!-- NAV -->
+<nav>
+    <img class="nav-logo" src="logo.png" alt="MemRSyS">
+    <ul>
+        <li><a href="#technology">Teknoloji</a></li>
+        <li><a href="#market">Pazar</a></li>
+        <li><a href="#team">Ekip</a></li>
+        <li><a href="teknoloji.html">Detaylar</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
 <header>
-    <h1>MemRSyS</h1>
+    <img class="hero-logo" src="logo.png" alt="MemRSyS — Intelligence at the Edge">
     <h2>Intelligence at the Edge</h2>
-    <p>Next-Generation Memristor Hardware for Ultra-Low Power Edge AI Acceleration.</p>
-    <a href="#about" class="cta-button">Teknolojiyi Keşfet</a>
+    <p>Türkiye'nin ilk CMOS uyumlu memristör tabanlı Yapay Zeka Hızlandırıcı IP Çekirdeği.
+       Savunma, havacılık ve endüstriyel Edge AI için yerli, düşük güçlü NPU çözümü.</p>
+    <div class="badges">
+        <div class="badge"><span>Güç: </span>&lt; 1 W</div>
+        <div class="badge"><span>Verim: </span>&gt; 10 TOPS/W</div>
+        <div class="badge"><span>Mimari: </span>CNN + SNN</div>
+        <div class="badge"><span>PDK: </span>SKY130 → YITAL 65nm</div>
+    </div>
+    <a href="#technology" class="cta-button">Teknolojiyi Keşfet</a>
 </header>
 
-<section id="about">
-    <h2>Neden MemRSys?</h2>
+<hr class="divider">
+
+<!-- TECHNOLOGY -->
+<section id="technology">
+    <h2>Teknoloji</h2>
+    <p class="lead">Memristör crossbar mimarisi, Von Neumann darboğazını ortadan kaldırarak ağırlık matrislerini doğrudan bellekte işler.</p>
     <div class="grid">
         <div class="card">
-            <h3>Düşük Güç Tüketimi</h3>
-            <p>Memristor tabanlı mimari ile geleneksel GPU'lara göre 100x daha az enerji harcayın.</p>
+            <div class="metric">&lt; 1 W</div>
+            <h3>Ultra Düşük Güç</h3>
+            <p>Rakip çözümlere kıyasla 10–35× daha az enerji tüketimi. IHA ve aviyonik platformlarla tam uyumlu.</p>
         </div>
         <div class="card">
-            <h3>Sıfır Gecikme</h3>
-            <p>Bellek içi hesaplama (In-Memory Computing) ile veri transferi darboğazını ortadan kaldırın.</p>
+            <div class="metric">24×</div>
+            <h3>Enerji Verimliliği</h3>
+            <p>HfO₂ memristör crossbar üzerinde analog in-memory MAC işlemi — CPU'lara kıyasla 24× enerji avantajı.</p>
         </div>
         <div class="card">
-            <h3>Edge Optimized</h3>
-            <p>IoT cihazları ve otonom sistemler için optimize edilmiş kompakt donanım hızlandırıcı.</p>
+            <div class="metric">TRL 2-3</div>
+            <h3>Kanıtlanmış Temel</h3>
+            <p>Verilog-A model, SKY130 simülasyon ve SPICE doğrulaması tamamlandı. YITAL 65nm fabrikasyonuna hazır.</p>
+        </div>
+        <div class="card">
+            <div class="metric">Yerli</div>
+            <h3>EAR/FDPR Bağımsız</h3>
+            <p>Tamamen yerli IP çekirdeği. Coral TPU ve Hailo-8'in aksine ihracat kısıtı yok. YITAL 65nm uyumlu.</p>
         </div>
     </div>
 </section>
 
+<hr class="divider">
+
+<!-- MARKET -->
+<section id="market">
+    <h2>Hedef Pazar</h2>
+    <p class="lead">Edge AI donanım pazarı 22 Milyar USD (2024) → 58,9 Milyar USD (2030), CAGR %17,6.</p>
+    <div class="grid">
+        <div class="card">
+            <h3>🛩 Savunma & Havacılık</h3>
+            <p>IHA/SIHA görev bilgisayarları, aviyonik sensör füzyonu. Hedef: ASELSAN, STM, Baykar, TUSAS.</p>
+        </div>
+        <div class="card">
+            <h3>⚙️ Endüstriyel Edge AI</h3>
+            <p>Gerçek zamanlı anomali tespiti, endüstriyel IoT uç düğümleri, üretim kalite kontrolü.</p>
+        </div>
+        <div class="card">
+            <h3>🏥 Medikal & Giyilebilir</h3>
+            <p>EEG/EMG sinyal işleme, pil ömrü kritik medikal cihazlar, RISC-V ekosistemi ile royalty modeli.</p>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- TEAM -->
+<section id="team">
+    <h2>Ekip</h2>
+    <p class="lead">19 yıl temiz oda deneyimi, 5 SCI-E makale, h-indeks 13, 813 atıf.</p>
+    <div class="grid">
+        <div class="card">
+            <h3>Prof. Dr. Fatih Gül</h3>
+            <p>CEO & Kurucu | RTEÜ EEM, AI & IoT Lab<br>
+            Memristör tasarımı, CMOS VLSI, nöromorfik hesaplama.<br>
+            Stanford/Elsevier Top %2 · ScholarGPS #78</p>
+        </div>
+        <div class="card">
+            <h3>YITAL 65nm</h3>
+            <p>TÜBİTAK + HBKU iş birliği (Aralık 2023).<br>
+            IP tasarımı SKY130'da tamamlanıyor;<br>
+            YITAL hazır olduğunda anında fabrikasyon — <em>first-mover avantajı.</em></p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-    &copy; 2026 MemRSyS Technologies. Tüm Hakları Saklıdır.
+    <img src="logo.png" alt="MemRSyS">
+    <br>
+    &copy; 2026 MemRSyS Technologies &nbsp;|&nbsp; RTEÜ EEM AI &amp; IoT Lab &nbsp;|&nbsp; Rize, Türkiye
+    <br>
+    <a href="mailto:fatih.gul@erdogan.edu.tr" style="color:#3a7a99;">fatih.gul@erdogan.edu.tr</a>
 </footer>
 
 </body>
