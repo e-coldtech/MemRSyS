@@ -19,7 +19,10 @@
         nav ul a:hover { color: #00d4ff; }
 
         /* HERO */
-        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle at 50% 40%, #0d2035 0%, #0a0e14 70%); text-align: center; padding: 100px 20px 60px; }
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle at 50% 40%, #0d2035 0%, #0a0e14 70%); text-align: center; padding: 100px 20px 60px; position: relative; overflow: hidden; }
+        .hero-bg-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.06; pointer-events: none; }
+        @keyframes dash { to { stroke-dashoffset: -400; } }
+        .anim-path { stroke-dasharray: 200 200; animation: dash 6s linear infinite; }
         header img.hero-logo { width: min(560px, 88vw); margin-bottom: 24px; }
         header h2 { font-size: 1.0rem !important; color: #3a7a8a !important; letter-spacing: 2px !important; text-transform: none !important; margin-bottom: 24px; font-weight: 400 !important; font-family: 'Share Tech Mono', 'Courier New', monospace !important; }
         header p { font-size: 1.1rem; max-width: 640px; color: #8a9ab0; margin-bottom: 40px; }
@@ -62,6 +65,20 @@
 
 <!-- HERO -->
 <header>
+    <!-- Dekoratif arka plan SVG — özgün, telif yok -->
+    <svg class="hero-bg-svg" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Grid noktaları -->
+      <defs>
+        <pattern id="grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <circle cx="30" cy="30" r="1" fill="#00d4ff"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+      <!-- Lissajous benzeri animasyonlu çizgiler -->
+      <path class="anim-path" d="M100,300 C200,150 400,150 600,300 C800,450 1000,450 1100,300" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+      <path class="anim-path" style="animation-delay:-2s" d="M100,300 C200,450 400,450 600,300 C800,150 1000,150 1100,300" fill="none" stroke="#7C5CFF" stroke-width="1"/>
+      <path class="anim-path" style="animation-delay:-4s" d="M0,200 C300,100 600,500 900,200 C1050,100 1150,300 1200,250" fill="none" stroke="#00FFB2" stroke-width="0.8"/>
+    </svg>
     <img class="hero-logo" src="logo.png" alt="MemRSyS — Intelligence at the Edge">
     <h2>intelligence at the edge</h2>
     <p>Türkiye'nin ilk CMOS uyumlu memristör tabanlı Yapay Zeka Hızlandırıcı IP Çekirdeği.
@@ -226,27 +243,47 @@
     </div>
 </section>
 
-<!-- YAYINLAR & BASIN -->
-<section id="press" style="background:#080c12; max-width:100%; padding:70px 20px;">
-  <div style="max-width:960px; margin:auto;">
-    <h2>Yayınlar & Akademik Temel</h2>
-    <p class="lead">TÜBİTAK 1001 (121E544) destekli Ar-Ge · 41 yayın · 16 WoS · h=9</p>
+<!-- YAYINLAR & AKADEMİK TEMEL -->
+<section id="press" style="background:#080c12; max-width:100%; padding:70px 20px; position:relative; overflow:hidden;">
+  <!-- Dekoratif SVG arka plan (özgün, telif yok) -->
+  <svg style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.04;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <circle cx="20" cy="20" r="1.5" fill="#00d4ff"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#dots)"/>
+  </svg>
+  <div style="max-width:960px; margin:auto; position:relative;">
+    <h2>Yayınlar &amp; Akademik Temel</h2>
+    <p class="lead">TÜBİTAK 1001 (121E544) destekli Ar-Ge · 41 yayın · 16 WoS · h=9
+      &nbsp;<a href="https://avesis.erdogan.edu.tr/fatih.gul" target="_blank" style="color:#00d4ff;font-size:0.85rem;">AVESİS →</a>
+      &nbsp;<a href="https://scholar.google.com.tr/citations?user=NNcvQEMAAAAJ" target="_blank" style="color:#00d4ff;font-size:0.85rem;">Google Scholar →</a>
+    </p>
     <div class="grid">
-      <div class="card">
-        <h3>IEEE Access 2024</h3>
-        <p>CMOS uyumlu HfO₂/TiO₂ memristör elektriksel karakterizasyonu — ON/OFF &gt;7000</p>
+      <div class="card" style="border-left:3px solid #00d4ff;">
+        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">IEEE ACCESS · 2024</div>
+        <h3 style="font-size:1rem;">CMOS Uyumlu Memristör Karakterizasyonu</h3>
+        <p style="margin-top:8px;">HfO₂/TiO₂ RRAM — ON/OFF &gt;7000, N=113 deney, tekdüzelik %49</p>
+        <a href="https://avesis.erdogan.edu.tr/fatih.gul/publications" target="_blank" style="display:inline-block;margin-top:12px;color:#00d4ff;font-size:0.82rem;">Makaleye git →</a>
       </div>
-      <div class="card">
-        <h3>Integration (VLSI J.) 2025</h3>
-        <p>Analog crossbar NPU devre tasarımı — SPICE doğrulaması</p>
+      <div class="card" style="border-left:3px solid #7C5CFF;">
+        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">INTEGRATION (VLSI J.) · 2025</div>
+        <h3 style="font-size:1rem;">Analog Crossbar NPU Devre Tasarımı</h3>
+        <p style="margin-top:8px;">SKY130 PDK üzerinde memristör crossbar NPU SPICE doğrulaması</p>
+        <a href="https://avesis.erdogan.edu.tr/fatih.gul/publications" target="_blank" style="display:inline-block;margin-top:12px;color:#7C5CFF;font-size:0.82rem;">Makaleye git →</a>
       </div>
-      <div class="card">
-        <h3>Neural Networks (Elsevier)</h3>
-        <p>Memristör tabanlı SNN çıkarım ve eğitim — nöromorfik hesaplama</p>
+      <div class="card" style="border-left:3px solid #00FFB2;">
+        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">NEURAL NETWORKS · ELSEVIER</div>
+        <h3 style="font-size:1rem;">Memristör Tabanlı SNN Çıkarımı</h3>
+        <p style="margin-top:8px;">Nöromorfik hesaplama mimarisi — spike kodlama ve eğitim akışı</p>
+        <a href="https://avesis.erdogan.edu.tr/fatih.gul/publications" target="_blank" style="display:inline-block;margin-top:12px;color:#00FFB2;font-size:0.82rem;">Makaleye git →</a>
       </div>
-      <div class="card">
-        <h3>Faydalı Model — TÜRKPATENT</h3>
-        <p>Araştırma raporu tamamlandı, buluş askıya çıkarıldı. IP koruması aktif.</p>
+      <div class="card" style="border-left:3px solid #C9972A;">
+        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">TÜRKPATENT · 2025</div>
+        <h3 style="font-size:1rem;">Faydalı Model Başvurusu</h3>
+        <p style="margin-top:8px;">Araştırma raporu tamamlandı, buluş askı sürecinde. IP koruması aktif.</p>
+        <span style="display:inline-block;margin-top:12px;color:#C9972A;font-size:0.82rem;">Tescil bekleniyor ⏳</span>
       </div>
     </div>
   </div>
