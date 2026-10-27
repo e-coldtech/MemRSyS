@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MemRSyS | Memristör GPU/NPU Teknolojisi</title>
-    <meta name="description" content="Memristör tabanlı GPU ve NPU mimarisi: analog in-memory computing, nöromorfik işlem birimleri, crossbar dizileri ve gelecek nesil yapay zeka donanımı.">
+    <meta name="description" content="Memristör tabanlı NPU mimarisi: analog bellek-içi hesaplama, karma sinyal (analog + sayısal) tasarım, ayrı memristör PDK'sı ve SKY130 → YİTAL 110 nm → 65 nm yol haritası.">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -30,6 +31,7 @@
         .section-tag { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
         h2.title { font-size: clamp(1.5rem, 2.5vw, 2.2rem); color: #fff; margin-bottom: 14px; }
         .sub { color: var(--text-dim); max-width: 640px; margin-bottom: 44px; }
+        .sub a, .card p a, .tl-item p a { color: var(--cyan); text-decoration: none; }
         hr.div { border: none; border-top: 1px solid var(--border); }
         .arch-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 50px; overflow-x: auto; }
         .arch-title { color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 28px; }
@@ -43,18 +45,26 @@
         .arch-arrow.red { color: var(--red); }
         .arch-arrow.green { color: var(--green); }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 20px; }
         .card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 26px; transition: border-color 0.3s, transform 0.3s; }
         .card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-3px); }
         .card-icon { font-size: 1.8rem; margin-bottom: 14px; }
         .card h3 { color: var(--cyan); font-size: 0.97rem; margin-bottom: 10px; }
         .card p { color: var(--text-dim); font-size: 0.87rem; }
+        .card ul { list-style: none; margin-top: 8px; }
+        .card ul li { color: var(--text-dim); font-size: 0.85rem; padding: 4px 0; border-bottom: 1px solid var(--border); }
+        .card ul li:last-child { border: none; }
+        .card ul li strong { color: #fff; font-weight: 600; }
         .layer-stack { display: flex; flex-direction: column; gap: 6px; max-width: 700px; margin: 0 auto; }
         .layer { display: flex; align-items: center; gap: 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 22px; }
         .layer-num { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,212,255,0.12); border: 1px solid rgba(0,212,255,0.3); color: var(--cyan); font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .layer-body h4 { color: #fff; font-size: 0.9rem; margin-bottom: 3px; }
         .layer-body p { color: var(--text-dim); font-size: 0.8rem; }
         .layer.active { border-color: var(--cyan); background: rgba(0,212,255,0.04); }
+        .layer-tag { margin-left: auto; font-size: 0.68rem; letter-spacing: 1px; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+        .layer-tag.d { color: var(--purple); border: 1px solid rgba(124,92,252,0.35); }
+        .layer-tag.a { color: var(--cyan); border: 1px solid rgba(0,212,255,0.35); }
+        .layer-tag.m { color: var(--yellow); border: 1px solid rgba(227,179,65,0.35); }
         .timeline { position: relative; padding-left: 30px; }
         .timeline::before { content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
         .tl-item { position: relative; margin-bottom: 32px; }
@@ -84,6 +94,7 @@
         .ref-list { list-style: none; }
         .ref-list li { padding: 10px 0; border-bottom: 1px solid var(--border); color: var(--text-dim); font-size: 0.84rem; }
         .ref-list li:last-child { border: none; }
+        .ref-list a { color: var(--cyan); text-decoration: none; word-break: break-all; }
         .ref-num { color: var(--cyan); font-weight: 600; margin-right: 8px; }
         .cta-strip { background: radial-gradient(ellipse 80% 100% at 50% 100%, #0d1f35 0%, var(--bg2) 70%); border: 1px solid var(--border); border-radius: 14px; padding: 50px 40px; text-align: center; }
         .cta-strip h2 { color: #fff; font-size: 1.8rem; margin-bottom: 14px; }
@@ -96,7 +107,7 @@
         footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         footer .logo { font-size: 1rem; font-weight: 700; color: var(--cyan); letter-spacing: 2px; }
         footer p { color: var(--text-dim); font-size: 0.78rem; }
-        @media (max-width: 640px) { .nav-links { display: none; } .compare-row { grid-template-columns: 1fr; } .arch-flow { flex-direction: column; } }
+        @media (max-width: 640px) { .nav-links { display: none; } .compare-row { grid-template-columns: 1fr; } .arch-flow { flex-direction: column; } .container { padding: 64px 16px; } .arch-box { padding: 24px 16px; } .cta-strip { padding: 36px 16px; } .btn-outline { margin: 12px 0 0; } .layer { flex-wrap: wrap; } }
     </style>
 </head>
 <body>
@@ -107,6 +118,7 @@
         <li><a href="#von-neumann">Von Neumann Sorunu</a></li>
         <li><a href="#memristor">Memristör Nedir</a></li>
         <li><a href="#mimari">NPU Mimarisi</a></li>
+        <li><a href="#karma-sinyal">Karma Sinyal &amp; PDK</a></li>
         <li><a href="#uygulama">Uygulama Alanları</a></li>
         <li><a href="#kaynaklar">Kaynaklar</a></li>
     </ul>
@@ -116,13 +128,13 @@
 <div class="hero">
     <div class="hero-tag">Teknoloji Derinlemesine</div>
     <h1>Memristör Tabanlı<br><span>GPU &amp; NPU</span> Mimarisi</h1>
-    <p>Von Neumann darboğazını aşan, bellek içinde hesaplama (In-Memory Computing) ile çalışan yeni nesil yapay zeka donanımının temel ilkeleri.</p>
+    <p>Von Neumann darboğazını aşan, bellek içinde hesaplama (In-Memory Computing) ile çalışan yeni nesil yapay zekâ donanımının temel ilkeleri.</p>
 </div>
 
 <div class="container" id="von-neumann">
     <div class="section-tag">Temel Sorun</div>
     <h2 class="title">Von Neumann Darboğazı</h2>
-    <p class="sub">1945'ten bu yana kullanılan klasik bilgisayar mimarisinde işlemci ile bellek fiziksel olarak ayrıdır. Her hesaplama adımında veri bu iki birim arasında taşınmak zorundadır. Bu darboğaz, günümüz YZ yüklerinde toplam enerji tüketiminin %60'ından fazlasını oluşturmaktadır.</p>
+    <p class="sub">1945'ten bu yana kullanılan klasik bilgisayar mimarisinde işlemci ile bellek fiziksel olarak ayrıdır. Her hesaplama adımında veri bu iki birim arasında taşınmak zorundadır. Google'ın tüketici cihaz iş yüklerinde (TensorFlow Mobile dahil) veri hareketi, toplam sistem enerjisinin ortalama %62,7'sini oluşturmaktadır [8].</p>
     <div class="arch-box">
         <div class="arch-title">Klasik GPU Mimarisi vs. Analog In-Memory Computing</div>
         <div style="margin-bottom: 30px;">
@@ -157,20 +169,20 @@
             <ul>
                 <li>Bellek ↔ İşlemci veri hareketi zorunlu</li>
                 <li>7–35 W tipik güç tüketimi (kenar cihaz)</li>
-                <li>Gecikme: bellek bantgenişliği ile sınırlı</li>
+                <li>Gecikme: bellek bant genişliği ile sınırlı</li>
                 <li>Her çıkarım için yüzlerce MB veri transferi</li>
-                <li>IoT ve İHA platformlarında kullanılamaz</li>
+                <li>IoT ve İHA platformlarında güç bütçesini aşar</li>
             </ul>
         </div>
         <div class="compare-card new">
             <div class="label">MemRSyS NPU</div>
             <h3>Analog In-Memory Computing</h3>
             <ul>
-                <li>Veri hareketi yok: hesaplama bellekte gerçekleşir</li>
-                <li>&lt;1 W operasyonel güç tüketimi</li>
+                <li>Ağırlıklar taşınmaz: çarpma-toplama bellekte yapılır</li>
+                <li>&lt;1 W hedef güç bütçesi</li>
                 <li>Gecikme: analog paralel işlem, minimum</li>
-                <li>MVM fiziksel yasalarla (Ohm/Kirchhoff) anlık</li>
-                <li>İHA, taktik sistem, giyilebilir cihaz uyumlu</li>
+                <li>MVM fiziksel yasalarla (Ohm/Kirchhoff) tek adımda</li>
+                <li>İHA, taktik sistem, giyilebilir cihaz hedefli</li>
             </ul>
         </div>
     </div>
@@ -181,7 +193,7 @@
 <div class="container" id="memristor">
     <div class="section-tag">Temel Bileşen</div>
     <h2 class="title">Memristör Nedir?</h2>
-    <p class="sub">1971'de Leon Chua tarafından teorik olarak öngörülen, 2008'de fiziksel olarak gerçeklenen dördüncü temel devre elemanı. Direnç değerini üzerinden geçen toplam yük miktarına göre değiştiren ve güç kesildiğinde bu değeri koruyan "bellek-direnç".</p>
+    <p class="sub">1971'de Leon Chua tarafından teorik olarak öngörülen [7], 2008'de HP Labs'te TiO₂ ince filmde fiziksel olarak gösterilen [6] dördüncü temel devre elemanı. Direnç değerini üzerinden geçen toplam yük miktarına göre değiştiren ve güç kesildiğinde bu değeri koruyan "bellek-direnç".</p>
     <div class="grid-3">
         <div class="card">
             <div class="card-icon">⚛️</div>
@@ -191,27 +203,27 @@
         <div class="card">
             <div class="card-icon">🧮</div>
             <h3>Yapay Sinaps Olarak Kullanım</h3>
-            <p>Her memristör, sinir ağındaki bir ağırlığı fiziksel iletkenlik değeri olarak saklar. Crossbar dizisinde sütun akımı toplamı, Ohm Yasası ile otomatik olarak MVM sonucunu verir.</p>
+            <p>Her memristör, sinir ağındaki bir ağırlığı fiziksel iletkenlik değeri olarak saklar. Crossbar dizisinde sütun akımı toplamı, Ohm ve Kirchhoff yasalarıyla doğrudan MVM sonucunu verir. Transistörsüz metal-oksit crossbar'da tek katmanlı algılayıcı yerinde eğitilmiştir [2].</p>
         </div>
         <div class="card">
             <div class="card-icon">⏱️</div>
             <h3>Kalıcılık (Endürans)</h3>
-            <p>HfO₂ tabanlı RRAM: ≥10⁸ yazma/silme döngüsü. Veri tutma: &gt;10 yıl 85°C'de. CMOS back-end-of-line süreciyle tam uyumlu entegrasyon.</p>
+            <p>HfO₂ tabanlı RRAM: ≥10⁸ yazma/silme döngüsü. Veri tutma: &gt;10 yıl 85°C'de. CMOS'un arka uç (BEOL) metal katmanları arasına entegre edilebilir.</p>
         </div>
         <div class="card">
             <div class="card-icon">🔬</div>
             <h3>TiO₂/ZnO Memristör Araştırması</h3>
-            <p>Bipolar resistive switching karakterizasyonu, sneak-path problemi çözümü (Schottky diyot entegrasyonu). Üniversite araştırma laboratuvarında yürütülen özgün araştırma.</p>
+            <p>Üniversite laboratuvarında üretilen ZnO ve TiO₂ memristörlerin karakterizasyonu [10]; sneak-path problemine Schottky diyotlu 1S1R çözümü [5]. 62 TiO₂ cihazda 763 anahtarlama döngüsünden eşik gerilimlerinin makine öğrenmesiyle öngörüsü [11].</p>
         </div>
         <div class="card">
             <div class="card-icon">📊</div>
             <h3>Enerji Kazancı</h3>
-            <p>Analog in-memory computing'de CPU'ya kıyasla <strong style="color:#fff">6,8–24×</strong> enerji kazancı (Nature Electronics, 2018). CMOS nöromorfik: 4.000 GOPS/mm², 3.000 GOPS/W.</p>
+            <p>Veri hareketi tüketici cihazlarda toplam sistem enerjisinin ortalama <strong style="color:#fff">%62,7</strong>'si [8]; bellek-içi hesaplama bu payı hedef alır. Karma hassasiyetli bellek-içi hesaplama, 998.752 faz değişimli bellek (PCM) aygıtıyla 5.000 denklemlik bir doğrusal sistemi doğru çözmüştür [1].</p>
         </div>
         <div class="card">
             <div class="card-icon">🏭</div>
-            <h3>Üretim Uyumluluğu</h3>
-            <p>Mevcut CMOS fab altyapısıyla uyumlu — yeni üretim hattı gerektirmez. 65 nm / 28 nm süreç entegrasyonu mümkün. Çok katmanlı crossbar ile yüksek yoğunluk.</p>
+            <h3>Üretim: Ayrı Süreç Modülü</h3>
+            <p>Memristör katmanı, CMOS'un metal katmanları arasına (BEOL) ek süreç adımlarıyla eklenir. Bu yüzden standart CMOS PDK'sı yetmez; ayrı bir memristör PDK'sı gerekir (<a href="#karma-sinyal">aşağıda</a>).</p>
         </div>
     </div>
 </div>
@@ -221,38 +233,44 @@
 <div class="container" id="mimari">
     <div class="section-tag">MemRSyS NPU</div>
     <h2 class="title">Nöromorfik İşlem Birimi Mimarisi</h2>
-    <p class="sub">Katmanlı mimari: dijital giriş/çıkış arayüzleri arasında analog memristör crossbar çekirdeği yer alır.</p>
+    <p class="sub">Karma sinyal mimari: sayısal giriş/çıkış ve kontrol blokları arasında analog memristör crossbar çekirdeği yer alır. Her katmanın yanındaki etiket, o katmanın hangi tasarım alanına ve hangi PDK'ya ait olduğunu gösterir.</p>
     <div class="layer-stack" style="margin-bottom: 50px;">
         <div class="layer">
             <div class="layer-num">1</div>
-            <div class="layer-body"><h4>Dijital Giriş Arayüzü</h4><p>Sensör verisi / özellik vektörü → DAC (Dijital-Analog Dönüştürücü)</p></div>
+            <div class="layer-body"><h4>Sayısal Giriş Arayüzü</h4><p>Sensör verisi / özellik vektörü → DAC (Dijital-Analog Dönüştürücü)</p></div>
+            <span class="layer-tag d">SAYISAL</span>
         </div>
         <div class="layer active">
             <div class="layer-num">2</div>
             <div class="layer-body"><h4>Memristör Crossbar Dizisi</h4><p>Ağırlıklar iletkenlik değeri olarak saklanır · Ohm Yasası ile MVM · Kirchhoff Akım Yasası ile toplama</p></div>
+            <span class="layer-tag m">MEMRİSTÖR PDK</span>
         </div>
         <div class="layer active">
             <div class="layer-num">3</div>
-            <div class="layer-body"><h4>Analog Aktivasyon &amp; Normalizasyon</h4><p>ReLU / Sigmoid aktivasyon · Batch normalizasyon eşdeğeri analog devre ile</p></div>
+            <div class="layer-body"><h4>Analog Çevre Devreleri, Aktivasyon &amp; Normalizasyon</h4><p>Satır/sütun sürücüleri, akım algılama · ReLU / Sigmoid aktivasyon · Batch normalizasyon eşdeğeri analog devre</p></div>
+            <span class="layer-tag a">ANALOG</span>
         </div>
         <div class="layer active">
             <div class="layer-num">4</div>
             <div class="layer-body"><h4>Çok Katmanlı Crossbar Yığını</h4><p>Her sinir ağı katmanı bir crossbar dizisine karşılık gelir · Paralel çıkarım (inference)</p></div>
+            <span class="layer-tag m">MEMRİSTÖR PDK</span>
         </div>
         <div class="layer">
             <div class="layer-num">5</div>
-            <div class="layer-body"><h4>Dijital Çıkış Arayüzü</h4><p>ADC (Analog-Dijital Dönüştürücü) → Sınıflandırma / Karar çıkışı</p></div>
+            <div class="layer-body"><h4>Sayısal Çıkış &amp; Kontrol</h4><p>ADC (Analog-Dijital Dönüştürücü) → Birikim, sınıflandırma / karar çıkışı · Zamanlama ve kontrol mantığı</p></div>
+            <span class="layer-tag d">SAYISAL</span>
         </div>
         <div class="layer">
             <div class="layer-num">6</div>
-            <div class="layer-body"><h4>Yerli PDK &amp; EDA Araç Zinciri</h4><p>OpenROAD · Magic · Ngspice · 65 nm proses uyumlu</p></div>
+            <div class="layer-body"><h4>Karma Sinyal Tasarım Akışı</h4><p>OpenLane / OpenROAD (sayısal) · Magic · Ngspice (analog) · Memristör PDK · SKY130 → YİTAL 110 nm → 65 nm</p></div>
+            <span class="layer-tag a">A + D</span>
         </div>
     </div>
     <div class="grid-2">
         <div class="card">
             <h3>GPU vs NPU: Farklı Hedefler</h3>
             <p style="margin-bottom: 14px;"><strong style="color:#fff">GPU (Grafik İşlem Birimi):</strong> Binlerce küçük çekirdekle paralel float hesaplama. Eğitim (training) için idealdir; yüksek güç tüketir (200–700 W). Veri merkezi ve bulut için tasarlanmıştır.</p>
-            <p><strong style="color:#fff">NPU (Sinir İşlem Birimi):</strong> Çıkarım (inference) için özelleştirilmiş; sabit ağırlıkları düşük güçle değerlendirmek için optimize edilmiştir. MemRSyS NPU, analog fizik yasaları ile bu işlemi &lt;1 W'ta gerçekleştirir.</p>
+            <p><strong style="color:#fff">NPU (Sinir İşlem Birimi):</strong> Çıkarım (inference) için özelleştirilmiş; sabit ağırlıkları düşük güçle değerlendirmek için optimize edilmiştir. MemRSyS NPU bu işlemi analog fizik yasalarıyla yapar ve &lt;1 W güç bütçesini hedefler.</p>
         </div>
         <div class="card">
             <h3>Memristör NPU'nun Avantajları</h3>
@@ -260,12 +278,12 @@
                 <tr>
                     <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--text-dim);">Güç Tüketimi</td>
                     <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--red);">Klasik GPU: 7–35 W</td>
-                    <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--green);">NPU: &lt;1 W</td>
+                    <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--green);">NPU: &lt;1 W (hedef)</td>
                 </tr>
                 <tr>
-                    <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--text-dim);">Bellek Trafiği</td>
+                    <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--text-dim);">Ağırlık Trafiği</td>
                     <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--red);">Yüksek</td>
-                    <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--green);">Sıfır</td>
+                    <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--green);">Yok</td>
                 </tr>
                 <tr>
                     <td style="padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--text-dim);">Çıkarım Gecikmesi</td>
@@ -284,10 +302,57 @@
 
 <hr class="div">
 
+<div class="container" id="karma-sinyal">
+    <div class="section-tag">Tasarım ve Üretim Süreci</div>
+    <h2 class="title">Karma Sinyal Tasarım &amp; Ayrı PDK</h2>
+    <p class="sub">MemRSyS NPU tek bir tasarım alanında kalmaz: analog ve sayısal devreler aynı çipte birlikte çalışır, memristör hücresi ise standart CMOS PDK'sının dışında ayrı bir PDK gerektirir. Bu, üretim yol haritasını doğrudan belirler.</p>
+    <div class="grid-3" style="margin-bottom: 30px;">
+        <div class="card">
+            <div class="card-icon">〰️</div>
+            <h3>Analog Alan</h3>
+            <ul>
+                <li><strong>Crossbar MVM:</strong> ağırlık × giriş çarpımı ve akım toplamı</li>
+                <li><strong>Çevre devreleri:</strong> DAC, satır/sütun sürücüleri, akım algılama, ADC</li>
+                <li><strong>Akış:</strong> tam özel (full-custom) yerleşim, SPICE doğrulaması</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon">⧉</div>
+            <h3>Sayısal Alan</h3>
+            <ul>
+                <li><strong>Kontrol:</strong> zamanlama, katman sıralama, programlama/okuma döngüleri</li>
+                <li><strong>Veri yolu:</strong> birikim, aktivasyon tamponu, RISC-V AXI4 arayüzü</li>
+                <li><strong>Akış:</strong> RTL → sentez → yerleştirme-yönlendirme (standart hücre)</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon">🧩</div>
+            <h3>Ayrı Memristör PDK'sı</h3>
+            <ul>
+                <li><strong>Cihaz modeli:</strong> ölçülmüş cihaz verisine dayalı Verilog-A / SPICE modeli</li>
+                <li><strong>Kurallar:</strong> memristör katmanı için DRC/LVS</li>
+                <li><strong>Hücre:</strong> 1T1R / 1TnR hücre yerleşimi ve kütüphanesi</li>
+            </ul>
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Bugün: SKY130 Açık PDK</h3>
+            <p>SkyWater SKY130 açık PDK'sında ReRAM hücresi, temel PDK'dan ayrı bir kütüphane olarak sunulur (<a href="https://sky130-fd-pr-reram.readthedocs.io/" target="_blank" rel="noopener">sky130_fd_pr_reram</a>). Karma sinyal tasarım ve doğrulama bu açık akış üzerinde yürütülür.</p>
+        </div>
+        <div class="card">
+            <h3>Hedef: YİTAL 110 nm → 65 nm</h3>
+            <p>YİTAL'in bugünkü üretim yetkinliği 250 nm; 2027–2029 Orta Vadeli Program hedefi 110 nm [12]. TÜBİTAK–HBKU Gebze tesisi 110 ve 65 nm süreçlerini kapsıyor [13]. Bu süreçlerde sayısal hücre kütüphanesi ve analog cihaz modellerine ek olarak <strong style="color:#fff">ayrı bir memristör modül PDK'sının</strong> geliştirilmesi gerekir: önce 110 nm (2027 ve sonrası), ardından 65 nm.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="div">
+
 <div class="container" id="uygulama">
     <div class="section-tag">Uygulama Alanları</div>
     <h2 class="title">Nerede Kullanılır?</h2>
-    <p class="sub">MemRSyS NPU, enerji kısıtlı her otonom platform için uygundur.</p>
+    <p class="sub">MemRSyS NPU, enerji kısıtlı her otonom platform için tasarlanmaktadır. Güç değerleri hedeftir.</p>
     <div class="device-grid" style="margin-bottom: 50px;">
         <div class="device-card"><div class="icon">🚁</div><h4>İnsansız Hava Araçları</h4><p>Nesne tanıma, hedef takip, otonom navigasyon</p><span class="power">&lt;1 W</span></div>
         <div class="device-card"><div class="icon">🎯</div><h4>Akıllı Mühimmat</h4><p>Hedef ayrıştırma, arayıcı başlık YZ çıkarımı</p><span class="power">&lt;0.5 W</span></div>
@@ -302,33 +367,39 @@
     <div class="timeline">
         <div class="tl-item">
             <div class="tl-dot"></div>
-            <div class="tl-year">TRL 1–2 · 2018–2022</div>
+            <div class="tl-year">TRL 1–2 · 2015–2020</div>
             <h4>Temel Araştırma</h4>
-            <p>TiO₂, ZnO, HfO₂ ince film memristör sentezi ve karakterizasyonu. Sneak-path problemi için Schottky diyot tabanlı çözüm. Üniversite araştırma fonu kapsamında yürütülen proje.</p>
+            <p>ZnO ve TiO₂ ince film memristör üretimi ve karakterizasyonu (Superlattices Microstruct. 2017; Ceram. Int. 2017, 2018). Yalnız MOSFET kullanan memristör devreleri (IEEE TED 2018; IEEE EDL 2019). Sneak-path için 1S1R dizisi (Results Phys. 2019). TiO₂ yapay sinaptik cihaz (Appl. Nanosci. 2020).</p>
         </div>
         <div class="tl-item">
             <div class="tl-dot"></div>
-            <div class="tl-year">TRL 3–4 · 2023–2025</div>
-            <h4>Kavram Kanıtı</h4>
-            <p>Küçük ölçekli crossbar MVM demonstrasyonu. Ngspice simülasyon modeli. Nature Electronics ve Nature Communications atıflarıyla literatür temeli.</p>
+            <div class="tl-year">TRL 2 · 2021–2025</div>
+            <h4>Sinaptik Cihazdan Sinir Ağı Modeline</h4>
+            <p>Ölçülmüş cihaz karakteristiğiyle sinir ağı modelleri ve optimizasyonu (Integration 2024; IEEE Access 2024; IEEE TETCI 2025). Memristör tabanlı DNN hızlandırıcı derlemesi (Concurr. Comput. 2024).</p>
         </div>
         <div class="tl-item">
             <div class="tl-dot" style="border-color: var(--yellow);"></div>
-            <div class="tl-year" style="background: rgba(227,179,65,0.1); color: var(--yellow);">TRL 4–5 · 2025–2026</div>
-            <h4>Prototip Geliştirme ← Şu An</h4>
-            <p>NPU IP çekirdeği RTL tasarımı. PDK akışı OpenROAD ile doğrulama. Ulusal inovasyon ve girişimcilik programları kapsamında fonlama.</p>
+            <div class="tl-year" style="background: rgba(227,179,65,0.1); color: var(--yellow);">TRL 2–3 · 2025–2026</div>
+            <h4>NPU IP Tasarımı ← Şu An</h4>
+            <p>Cihaz verisiyle makine öğrenmesi (IEEE EDL 2026), analog bellek-içi öğrenme (Sci. Rep. 2026), sistem düzeyi eş-tasarım derlemesi (Adv. Phys. X 2026), AI donanımı enerji verimliliği derlemesi (JKSU-CIS 2026). NPU IP'nin RTL tasarımı ve SKY130 üzerinde karma sinyal simülasyonları.</p>
         </div>
         <div class="tl-item">
             <div class="tl-dot" style="border-color: var(--border);"></div>
-            <div class="tl-year" style="background: var(--bg3); color: var(--text-dim);">TRL 6–7 · 2026–2027</div>
-            <h4>Tapeout &amp; Doğrulama</h4>
-            <p>65 nm yerli süreçte ilk silikon. Savunma ve havacılık platformlarında saha testleri. IP lisanslama modelinin oluşturulması.</p>
+            <div class="tl-year" style="background: var(--bg3); color: var(--text-dim);">TRL 3–4 · 2026–2027</div>
+            <h4>SKY130 Test Çipi</h4>
+            <p>Açık PDK ile MPW tape-out; analog ve sayısal blokların birlikte ilk silikon ölçümleri. NPU topolojisi için patent başvurusu.</p>
         </div>
         <div class="tl-item">
             <div class="tl-dot" style="border-color: var(--border);"></div>
-            <div class="tl-year" style="background: var(--bg3); color: var(--text-dim);">TRL 8–9 · 2028+</div>
-            <h4>Seri Üretim &amp; Lisanslama</h4>
-            <p>Savunma sanayii entegrasyonu. İHA ve taktik platform OEM lisans anlaşmaları. Uluslararası nöromorfik IP pazarına giriş.</p>
+            <div class="tl-year" style="background: var(--bg3); color: var(--text-dim);">TRL 4–6 · 2027 ve sonrası</div>
+            <h4>YİTAL 110 nm</h4>
+            <p>Sayısal ve analog blokların YİTAL 110 nm PDK'sına taşınması; ayrı memristör modül PDK'sının geliştirilmesi; yerli süreçte ilk karma sinyal test çipi. Savunma ve havacılık platformlarında saha testleri.</p>
+        </div>
+        <div class="tl-item">
+            <div class="tl-dot" style="border-color: var(--border);"></div>
+            <div class="tl-year" style="background: var(--bg3); color: var(--text-dim);">TRL 6+ · 110 nm sonrası</div>
+            <h4>YİTAL 65 nm &amp; Lisanslama</h4>
+            <p>65 nm'ye ölçekleme ve 65 nm memristör PDK'sı. Savunma sanayii entegrasyonu, İHA ve taktik platform OEM lisans anlaşmaları, uluslararası nöromorfik IP pazarına giriş.</p>
         </div>
     </div>
 </div>
@@ -338,15 +409,21 @@
 <div class="container" id="kaynaklar">
     <div class="section-tag">Bilimsel Temel</div>
     <h2 class="title">Temel Referanslar</h2>
-    <p class="sub">MemRSyS teknolojisinin dayandığı hakemli yayınlar.</p>
+    <p class="sub">MemRSyS teknolojisinin dayandığı hakemli yayınlar ve kaynaklar. Künyeler Crossref kayıtlarından doğrulanmıştır (27 Ekim 2026).</p>
     <ul class="ref-list">
-        <li><span class="ref-num">[1]</span> Le Gallo, M. et al. "Mixed-precision in-memory computing." <em>Nature Electronics</em>, 1, 246–253, 2018. — Analog in-memory computing'de 6,8–24× enerji kazancı.</li>
-        <li><span class="ref-num">[2]</span> Prezioso, M. et al. "Training and operation of an integrated neuromorphic network based on metal-oxide memristors." <em>Nature</em>, 521, 61–64, 2015. — HfO₂ crossbar MVM işlevsellik kanıtı.</li>
-        <li><span class="ref-num">[3]</span> Kim, S. et al. "Neuronal dynamics in HfOx/AlOy-based homeothermic synaptic memristors." <em>Nature Communications</em>, 12, 2021. — 4.000 GOPS/mm², 3.000 GOPS/W benchmark.</li>
-        <li><span class="ref-num">[4]</span> Gökgöz, Gül, Aydın. "An overview: memristor-based hardware accelerators for deep neural network inference." <em>Concurrency and Computation</em>, 2024.</li>
-        <li><span class="ref-num">[5]</span> Gül, F. "Addressing the sneak-path problem in crossbar RRAM devices using memristor-based one Schottky diode–one resistor array." 2018.</li>
-        <li><span class="ref-num">[6]</span> Strukov, D.B. et al. "The missing memristor found." <em>Nature</em>, 453, 80–83, 2008.</li>
-        <li><span class="ref-num">[7]</span> Chua, L.O. "Memristor — The missing circuit element." <em>IEEE Transactions on Circuit Theory</em>, 18(5), 507–519, 1971.</li>
+        <li><span class="ref-num">[1]</span> Le Gallo, M. et al. "Mixed-precision in-memory computing." <em>Nature Electronics</em>, 1(4), 246–253, 2018. — Faz değişimli bellek (PCM) ile 5.000 denklemlik doğrusal sistemin çözümü. <a href="https://doi.org/10.1038/s41928-018-0054-8" target="_blank" rel="noopener">doi:10.1038/s41928-018-0054-8</a></li>
+        <li><span class="ref-num">[2]</span> Prezioso, M. et al. "Training and operation of an integrated neuromorphic network based on metal-oxide memristors." <em>Nature</em>, 521, 61–64, 2015. — Transistörsüz metal-oksit memristör crossbar'da algılayıcının yerinde eğitimi. <a href="https://doi.org/10.1038/nature14441" target="_blank" rel="noopener">doi:10.1038/nature14441</a></li>
+        <li><span class="ref-num">[3]</span> Kim, S. et al. "Neuronal dynamics in HfO<sub>x</sub>/AlO<sub>y</sub>-based homeothermic synaptic memristors with low-power and homogeneous resistive switching." <em>Nanoscale</em>, 11(1), 237–245, 2019. <a href="https://doi.org/10.1039/c8nr06694a" target="_blank" rel="noopener">doi:10.1039/c8nr06694a</a></li>
+        <li><span class="ref-num">[4]</span> Gökgöz, B., Gül, F., Aydın, T. "An overview memristor based hardware accelerators for deep neural network." <em>Concurrency and Computation: Practice and Experience</em>, 36(9), e7997, 2024. <a href="https://doi.org/10.1002/cpe.7997" target="_blank" rel="noopener">doi:10.1002/cpe.7997</a></li>
+        <li><span class="ref-num">[5]</span> Gül, F. "Addressing the sneak-path problem in crossbar RRAM devices using memristor-based one Schottky diode–one resistor array." <em>Results in Physics</em>, 12, 1091–1096, 2019. <a href="https://doi.org/10.1016/j.rinp.2018.12.092" target="_blank" rel="noopener">doi:10.1016/j.rinp.2018.12.092</a></li>
+        <li><span class="ref-num">[6]</span> Strukov, D.B. et al. "The missing memristor found." <em>Nature</em>, 453, 80–83, 2008. <a href="https://doi.org/10.1038/nature06932" target="_blank" rel="noopener">doi:10.1038/nature06932</a></li>
+        <li><span class="ref-num">[7]</span> Chua, L.O. "Memristor — The missing circuit element." <em>IEEE Transactions on Circuit Theory</em>, 18(5), 507–519, 1971. <a href="https://doi.org/10.1109/TCT.1971.1083337" target="_blank" rel="noopener">doi:10.1109/TCT.1971.1083337</a></li>
+        <li><span class="ref-num">[8]</span> Boroumand, A. et al. "Google workloads for consumer devices: mitigating data movement bottlenecks." <em>Proc. ASPLOS '18</em>, 316–331, 2018. <a href="https://doi.org/10.1145/3173162.3173177" target="_blank" rel="noopener">doi:10.1145/3173162.3173177</a></li>
+        <li><span class="ref-num">[9]</span> Gül, F. "Memristive devices for edge artificial intelligence and neuromorphic computing: from resistive-switching physics to system-level co-design." <em>Advances in Physics: X</em>, 11(1), 2732088, 2026. <a href="https://doi.org/10.1080/23746149.2026.2732088" target="_blank" rel="noopener">doi:10.1080/23746149.2026.2732088</a></li>
+        <li><span class="ref-num">[10]</span> Gül, F. "Carrier transport mechanism and bipolar resistive switching behavior of a nano-scale thin film TiO₂ memristor." <em>Ceramics International</em>, 44(10), 11417–11423, 2018. <a href="https://doi.org/10.1016/j.ceramint.2018.03.198" target="_blank" rel="noopener">doi:10.1016/j.ceramint.2018.03.198</a></li>
+        <li><span class="ref-num">[11]</span> Gül, F. "Machine learning prediction of threshold switching voltages indicates a filamentary-to-homogeneous transition in TiO₂/TiO₂₋ₓ/TiO₂ memristors." <em>IEEE Electron Device Letters</em>, 47(7), 1478–1481, 2026. <a href="https://doi.org/10.1109/LED.2026.3695757" target="_blank" rel="noopener">doi:10.1109/LED.2026.3695757</a></li>
+        <li><span class="ref-num">[12]</span> "OVP'de çip üretiminde 110 nanometre hedefi." <em>Ticari Hayat</em>, 13 Eylül 2026 (2027–2029 Orta Vadeli Program). <a href="https://www.ticarihayat.com/ovpde-cip-uretiminde-110-nanometre-hedefi" target="_blank" rel="noopener">ticarihayat.com</a></li>
+        <li><span class="ref-num">[13]</span> TÜBİTAK. "Çip üretim tesisi yatırımı için imzalar atıldı." Nisan 2023; "TÜBİTAK'tan çip üretiminde yeni bir adım." <em>Para Dergi</em>, 23 Kasım 2024 (stratejik anlaşma 4 Aralık 2023; 110 ve 65 nm). <a href="https://www.tubitak.gov.tr/tr/node/16558" target="_blank" rel="noopener">tubitak.gov.tr</a> · <a href="https://www.paradergi.com.tr/teknoloji/2024/11/25/tubitaktan-cip-uretiminde-yeni-bir-adim" target="_blank" rel="noopener">paradergi.com.tr</a></li>
     </ul>
 </div>
 
@@ -356,15 +433,15 @@
     <div class="cta-strip">
         <h2>Teknolojiyi Birlikte Geliştirelim</h2>
         <p>IP lisanslama, PDK iş birliği veya teknik brifing talepleriniz için iletişime geçin.</p>
-        <a href="index.html#iletisim" class="btn btn-primary">İletişime Geç</a>
+        <a href="mailto:fatih.gul@erdogan.edu.tr" class="btn btn-primary">İletişime Geç</a>
         <a href="index.html" class="btn btn-outline">Ana Sayfa</a>
     </div>
 </div>
 
 <footer>
     <span class="logo">MemRSyS</span>
-    <p>&copy; 2026 MemRSyS Technologies</p>
-    <p style="color:#333; font-size:0.73rem;">Havacılık &amp; Uzay · Savunma Sanayii · Edge AI</p>
+    <p>&copy; 2026 MemRSyS · RTEÜ Elektrik-Elektronik Mühendisliği</p>
+    <p style="color:#4a5560; font-size:0.73rem;">Havacılık &amp; Uzay · Savunma Sanayii · Edge AI</p>
 </footer>
 
 </body>

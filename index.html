@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MemRSyS | Intelligence at the Edge</title>
+    <meta name="description" content="Memristör tabanlı, karma sinyal (analog + sayısal) yapay zekâ hızlandırıcı IP çekirdeği. SKY130 doğrulaması → TÜBİTAK BİLGEM YİTAL 110 nm → 65 nm.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -36,11 +37,30 @@
         section { padding: 80px 20px; max-width: 960px; margin: auto; }
         section h2 { font-size: 1.8rem; color: #00d4ff; margin-bottom: 12px; }
         section p.lead { color: #8a9ab0; margin-bottom: 40px; max-width: 640px; }
+        section p.lead a { color: #00d4ff; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         .card { background: #10171f; padding: 24px; border-radius: 10px; border: 1px solid #1a2a3a; }
         .card h3 { color: #00d4ff; margin-bottom: 10px; font-size: 1.05rem; }
         .card p { color: #8a9ab0; font-size: 0.9rem; }
+        .card p a { color: #00d4ff; }
         .card .metric { font-size: 2rem; font-weight: bold; color: #00d4ff; margin-bottom: 4px; }
+        .card .metric small { font-size: 0.8rem; color: #607d8b; font-weight: 400; margin-left: 6px; }
+
+        /* YAYINLAR */
+        .pub { background: #10171f; padding: 20px 22px; border-radius: 10px; border: 1px solid #1a2a3a; border-left: 3px solid #00d4ff; display: flex; flex-direction: column; }
+        .pub .venue { font-size: 0.72rem; color: #607d8b; margin-bottom: 6px; font-family: 'Share Tech Mono', monospace; letter-spacing: .5px; }
+        .pub h3 { font-size: 0.95rem; color: #d8e8f8; line-height: 1.4; margin-bottom: 6px; }
+        .pub .authors { font-size: 0.8rem; color: #7a8a9a; margin-bottom: 8px; }
+        .pub p { font-size: 0.84rem; color: #8a9ab0; }
+        .pub a.doi { margin-top: auto; padding-top: 10px; font-size: 0.8rem; color: #00d4ff; text-decoration: none; font-family: 'Share Tech Mono', monospace; }
+        .pub a.doi:hover { text-decoration: underline; }
+        .found-list { list-style: none; margin-top: 18px; }
+        .found-list li { padding: 9px 0; border-bottom: 1px solid #1a2a3a; font-size: 0.84rem; color: #8a9ab0; }
+        .found-list li:last-child { border-bottom: none; }
+        .found-list .yr { color: #00d4ff; font-family: 'Share Tech Mono', monospace; margin-right: 8px; }
+        .found-list a { color: #00d4ff; text-decoration: none; font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; }
+        .src-note { font-size: 0.75rem; color: #4a6070; margin-top: 18px; }
+        .src-note a { color: #3a7a99; }
 
         /* DIVIDER */
         .divider { border: none; border-top: 1px solid #1a2a3a; margin: 0; }
@@ -48,6 +68,12 @@
         /* FOOTER */
         footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #3a5060; border-top: 1px solid #1a2a3a; }
         footer img { height: 28px; margin-bottom: 12px; opacity: 0.6; }
+
+        @media (max-width: 720px) {
+            nav { padding: 12px 16px; }
+            nav ul { display: none; }
+            section { padding: 64px 16px; }
+        }
     </style>
 </head>
 <body>
@@ -57,7 +83,8 @@
     <img class="nav-logo" src="logo.png" alt="MemRSyS">
     <ul>
         <li><a href="#technology">Teknoloji</a></li>
-        <li><a href="#market">Pazar</a></li>
+        <li><a href="#roadmap">Yol Haritası</a></li>
+        <li><a href="#press">Yayınlar</a></li>
         <li><a href="#team">Ekip</a></li>
         <li><a href="teknoloji.html">Detaylar</a></li>
     </ul>
@@ -81,13 +108,15 @@
     </svg>
     <img class="hero-logo" src="logo.png" alt="MemRSyS — Intelligence at the Edge">
     <h2>intelligence at the edge</h2>
-    <p>Türkiye'nin ilk CMOS uyumlu memristör tabanlı Yapay Zeka Hızlandırıcı IP Çekirdeği.
-       Savunma, havacılık ve endüstriyel Edge AI için yerli, düşük güçlü NPU çözümü.</p>
+    <p>CMOS uyumlu, memristör tabanlı yapay zekâ hızlandırıcı (NPU) IP çekirdeği.
+       Savunma, havacılık ve endüstriyel uç (edge) yapay zekâ için düşük güçlü,
+       analog ve sayısal blokları birlikte kullanan karma sinyal tasarım.</p>
     <div class="badges">
-        <div class="badge"><span>Güç: </span>&lt; 1 W</div>
-        <div class="badge"><span>Verim: </span>&gt; 10 TOPS/W</div>
+        <div class="badge"><span>Hedef güç: </span>&lt; 1 W</div>
+        <div class="badge"><span>Hedef verim: </span>&gt; 10 TOPS/W</div>
         <div class="badge"><span>Mimari: </span>CNN + SNN</div>
-        <div class="badge"><span>PDK: </span>SKY130 → YITAL 65nm</div>
+        <div class="badge"><span>Tasarım: </span>Karma sinyal (analog + sayısal)</div>
+        <div class="badge"><span>Süreç: </span>SKY130 → YİTAL 110 nm → 65 nm</div>
     </div>
     <a href="#technology" class="cta-button">Teknolojiyi Keşfet</a>
 </header>
@@ -97,27 +126,32 @@
 <!-- TECHNOLOGY -->
 <section id="technology">
     <h2>Teknoloji</h2>
-    <p class="lead">Memristör crossbar mimarisi, Von Neumann darboğazını ortadan kaldırarak ağırlık matrislerini doğrudan bellekte işler.</p>
+    <p class="lead">Memristör crossbar mimarisi ağırlıkları iletkenlik olarak saklar ve çarpma-toplamayı bellekte yapar; böylece ağırlıkların bellek ile işlemci arasında taşınması gerekmez.</p>
     <div class="grid">
         <div class="card">
-            <div class="metric">&lt; 1 W</div>
-            <h3>Ultra Düşük Güç</h3>
-            <p>Rakip çözümlere kıyasla 10–35× daha az enerji tüketimi. IHA ve aviyonik platformlarla tam uyumlu.</p>
+            <div class="metric">&lt; 1 W<small>hedef</small></div>
+            <h3>Düşük Güç Bütçesi</h3>
+            <p>İHA ve aviyonik platformların güç sınırlarına göre belirlenmiş tasarım hedefi. Silikon üzerinde henüz ölçülmemiştir; ilk ölçüm test çipiyle yapılacaktır.</p>
         </div>
         <div class="card">
-            <div class="metric">24×</div>
-            <h3>Enerji Verimliliği</h3>
-            <p>HfO₂ memristör crossbar üzerinde analog in-memory MAC işlemi — CPU'lara kıyasla 24× enerji avantajı.</p>
+            <div class="metric">A + D</div>
+            <h3>Karma Sinyal Tasarım</h3>
+            <p>Matris-vektör çarpımı memristör crossbar'da analog olarak yapılır; DAC/ADC, kontrol, birikim ve veri yolu arayüzü sayısaldır. İki alan aynı çip üzerinde birlikte tasarlanır ve birlikte doğrulanır.</p>
+        </div>
+        <div class="card">
+            <div class="metric">PDK+</div>
+            <h3>Ayrı Memristör PDK'sı</h3>
+            <p>Memristör hücresi standart CMOS PDK'sında bulunmaz. Cihaz modeli, DRC/LVS kuralları ve hücre kütüphanesinden oluşan ayrı bir süreç modülü PDK'sı gerekir. SKY130'da bu kütüphane ayrı sunulur (<em>sky130_fd_pr_reram</em>).</p>
         </div>
         <div class="card">
             <div class="metric">TRL 2-3</div>
-            <h3>Kanıtlanmış Temel</h3>
-            <p>Verilog-A model, SKY130 simülasyon ve SPICE doğrulaması tamamlandı. YITAL 65nm fabrikasyonuna hazır.</p>
+            <h3>Doğrulanmış Temel</h3>
+            <p>Verilog-A memristör modeli, SKY130 simülasyonu ve SPICE doğrulaması tamamlandı. Sıradaki adımlar: SKY130 test çipi, ardından YİTAL 110 nm.</p>
         </div>
         <div class="card">
             <div class="metric">Yerli</div>
-            <h3>EAR/FDPR Bağımsız</h3>
-            <p>Tamamen yerli IP çekirdeği. Coral TPU ve Hailo-8'in aksine ihracat kısıtı yok. YITAL 65nm uyumlu.</p>
+            <h3>Yerli Tasarım, Yerli Üretim Hedefi</h3>
+            <p>IP çekirdeği yerli olarak tasarlanıyor. Üretim için TÜBİTAK BİLGEM YİTAL hedefleniyor: önce 110 nm, ardından 65 nm. Amaç, yabancı ihracat kontrol rejimlerine bağımlılığı azaltmaktır.</p>
         </div>
     </div>
 </section>
@@ -127,11 +161,12 @@
 <!-- MARKET -->
 <section id="market">
     <h2>Hedef Pazar</h2>
-    <p class="lead">Edge AI donanım pazarı 22 Milyar USD (2024) → 58,9 Milyar USD (2030), CAGR %17,6.</p>
+    <p class="lead">Uç yapay zekâ (edge AI) donanım pazarı: 26,14 milyar USD (2025) → 58,90 milyar USD (2030), yıllık bileşik büyüme %17,6
+      (<a href="https://www.marketsandmarkets.com/Market-Reports/edge-ai-hardware-market-50305971.html" target="_blank" rel="noopener">MarketsandMarkets</a>).</p>
     <div class="grid">
         <div class="card">
-            <h3>🛩 Savunma & Havacılık</h3>
-            <p>IHA/SIHA görev bilgisayarları, aviyonik sensör füzyonu. Hedef: ASELSAN, STM, Baykar, TUSAS.</p>
+            <h3>🛩 Savunma &amp; Havacılık</h3>
+            <p>İHA/SİHA görev bilgisayarları, aviyonik sensör füzyonu. Potansiyel kullanıcılar: ASELSAN, STM, Baykar, TUSAŞ.</p>
         </div>
         <div class="card">
             <h3>⚙️ Endüstriyel Edge AI</h3>
@@ -149,21 +184,28 @@
 <!-- TEAM -->
 <section id="team">
     <h2>Ekip</h2>
-    <p class="lead">41 yayın (16 WoS) · h-indeks 9 · 676 atıf · Nanoteknoloji, Yarı İletken Malzeme, IoT</p>
+    <p class="lead">55 yayın (29 WoS · 30 Scopus) · Google Scholar: 939 atıf, h-indeks 14 · Memristör cihazları, yarı iletken malzeme, nöromorfik donanım, IoT
+      <br><span style="font-size:0.8rem;color:#4a6070;">Kaynak: AVESİS ve Google Scholar, 27 Ekim 2026</span></p>
     <div class="grid">
         <div class="card">
             <h3>Prof. Dr. Fatih Gül</h3>
-            <p>CEO & Kurucu | RTEÜ EEM, Yapay Zeka &amp; IoT Araştırma Lab<br>
-            Anabilim Dalı Başkanı · Memristör tabanlı devre tasarımı,
+            <p>Proje Lideri · Recep Tayyip Erdoğan Üniversitesi, Elektrik-Elektronik Mühendisliği,
+            Yapay Zekâ ve Nesnelerin İnterneti Araştırma Laboratuvarı<br>
+            Anabilim Dalı Başkanı (2023–) · Memristör tabanlı devre tasarımı,
             yarı iletken malzeme karakterizasyonu, nöromorfik hesaplama.<br>
-            Stanford/Elsevier Top %2 (2020, 2021, 2024) · ScholarGPS #78 (Memristör)<br>
-            <a href="https://avesis.erdogan.edu.tr/fatih.gul" target="_blank" style="color:#00d4ff;">AVESİS Profil →</a></p>
+            Stanford/Elsevier “Dünyanın En Etkili Bilim İnsanları” listesi (2020, 2021, 2024)<br>
+            <a href="https://avesis.erdogan.edu.tr/fatih.gul" target="_blank" rel="noopener">AVESİS →</a> &nbsp;
+            <a href="https://scholar.google.com.tr/citations?user=Fv0m_PsAAAAJ" target="_blank" rel="noopener">Google Scholar →</a> &nbsp;
+            <a href="https://orcid.org/0000-0001-5072-2122" target="_blank" rel="noopener">ORCID →</a></p>
         </div>
         <div class="card">
-            <h3>YITAL 65nm İş Birliği</h3>
-            <p>TÜBİTAK + HBKU anlaşması (Aralık 2023).<br>
-            NPU IP tasarımı SKY130 açık PDK üzerinde doğrulanıyor;<br>
-            YITAL hazır olduğunda anında fabrikasyon — <em>first-mover avantajı.</em></p>
+            <h3>Üretim Hedefi: TÜBİTAK BİLGEM YİTAL</h3>
+            <p>YİTAL'in bugünkü üretim yetkinliği 250 nm. 2027–2029 Orta Vadeli Program'da hedef 110 nm.
+            TÜBİTAK–HBKU Gebze çip üretim tesisi (protokol Nisan 2023, stratejik iş birliği anlaşması 4 Aralık 2023; 200 mm pul) 110 nm ve 65 nm süreçlerini kapsıyor.<br>
+            MemRSyS yol haritası bu sırayı izler: SKY130 doğrulaması → <strong style="color:#c0e8ff">YİTAL 110 nm (2027 ve sonrası)</strong> → <strong style="color:#c0e8ff">65 nm</strong>.<br>
+            <span style="font-size:0.78rem;">Kaynak: <a href="https://www.tubitak.gov.tr/tr/node/16558" target="_blank" rel="noopener">TÜBİTAK</a> ·
+            <a href="https://www.paradergi.com.tr/teknoloji/2024/11/25/tubitaktan-cip-uretiminde-yeni-bir-adim" target="_blank" rel="noopener">Para Dergi</a> ·
+            <a href="https://www.ticarihayat.com/ovpde-cip-uretiminde-110-nanometre-hedefi" target="_blank" rel="noopener">OVP 2027–2029</a></span></p>
         </div>
     </div>
 </section>
@@ -175,8 +217,8 @@
     <p class="lead">Savunma'dan endüstriyel otomasyona — güç kısıtlı her platforma.</p>
     <div class="grid">
       <div class="card">
-        <h3>✈️ IHA / Aviyonik</h3>
-        <p>Gerçek zamanlı görüntü tanıma, nesne sınıflandırma ve sensör füzyonu. &lt;1W bütçesiyle IHA görev bilgisayarlarına entegre edilebilir.</p>
+        <h3>✈️ İHA / Aviyonik</h3>
+        <p>Gerçek zamanlı görüntü tanıma, nesne sınıflandırma ve sensör füzyonu. &lt;1 W hedef bütçesiyle İHA görev bilgisayarlarına entegre edilebilir.</p>
       </div>
       <div class="card">
         <h3>🏭 Endüstriyel Görüntü İşleme</h3>
@@ -197,7 +239,7 @@
 <!-- TEKNİK KARŞILAŞTIRMA -->
 <section id="compare">
     <h2>Rakip Karşılaştırması</h2>
-    <p class="lead">Neden MemRSyS? Güç, yerlilik ve açık ekosistem.</p>
+    <p class="lead">Neden MemRSyS? Bellek içinde analog hesaplama, yerlilik ve açık tasarım akışı. MemRSyS sütunundaki değerler tasarım hedefidir.</p>
     <div style="overflow-x:auto;">
     <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
       <thead>
@@ -211,32 +253,39 @@
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid #1a2a3a;">
-          <td style="padding:10px 16px; color:#a0b0c0;">Güç Tüketimi</td>
-          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">2 W</td>
-          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">2.5 W</td>
-          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">1-2 W</td>
-          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">&lt; 1 W</td>
+          <td style="padding:10px 16px; color:#a0b0c0;">Hesaplama</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">Sayısal</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">Sayısal</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">Sayısal</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">Analog bellek-içi + sayısal</td>
         </tr>
         <tr style="border-bottom:1px solid #1a2a3a; background:#0a0f18;">
-          <td style="padding:10px 16px; color:#a0b0c0;">İhracat Kısıtı</td>
-          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">EAR Kısıtlı</td>
-          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">FDPR Riski</td>
-          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">EAR Kısıtlı</td>
-          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">Yok ✓</td>
+          <td style="padding:10px 16px; color:#a0b0c0;">Güç Tüketimi</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">2 W</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">2,5 W</td>
+          <td style="padding:10px 16px; text-align:center; color:#8a9ab0;">1-2 W</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">&lt; 1 W (hedef)</td>
         </tr>
         <tr style="border-bottom:1px solid #1a2a3a;">
+          <td style="padding:10px 16px; color:#a0b0c0;">İhracat Mevzuatı</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">ABD (EAR kapsamında)</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">İsrail · FDPR riski</td>
+          <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">ABD (EAR kapsamında)</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">Yerli IP</td>
+        </tr>
+        <tr style="border-bottom:1px solid #1a2a3a; background:#0a0f18;">
           <td style="padding:10px 16px; color:#a0b0c0;">Açık PDK</td>
           <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
           <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
           <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
           <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">SKY130 ✓</td>
         </tr>
-        <tr style="background:#0a0f18;">
+        <tr>
           <td style="padding:10px 16px; color:#a0b0c0;">Yerli Fab</td>
           <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
           <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
           <td style="padding:10px 16px; text-align:center; color:#ff6b6b;">Hayır</td>
-          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">YITAL 65nm ✓</td>
+          <td style="padding:10px 16px; text-align:center; color:#00FFB2; font-weight:bold;">YİTAL 110 → 65 nm (hedef)</td>
         </tr>
       </tbody>
     </table>
@@ -255,6 +304,7 @@
   .milestone:last-child{border-bottom:none}
   .ms-done{color:#00d4ff}.ms-prog{color:#7C5CFF}.ms-todo{color:#3a4a5a}
   .trl-badge{font-family:'Share Tech Mono',monospace;font-size:.7rem;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:1px}
+  .rm-when{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:#607d8b;margin-top:4px}
 </style>
 
 <!-- Arka plan dekorasyon -->
@@ -270,7 +320,7 @@
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:48px">
     <div>
       <h2 style="margin-bottom:8px">Technology Roadmap</h2>
-      <p style="color:#607d8b;font-family:'Share Tech Mono',monospace;font-size:.85rem;margin:0">milestone-driven · technology-gated · fab-ready</p>
+      <p style="color:#607d8b;font-family:'Share Tech Mono',monospace;font-size:.85rem;margin:0">milestone-driven · mixed-signal · foundry-gated</p>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
       <span style="font-size:.75rem;padding:4px 12px;border-radius:4px;background:#00d4ff18;color:#00d4ff;border:1px solid #00d4ff33;font-family:'Share Tech Mono',monospace">● ACTIVE</span>
@@ -284,7 +334,7 @@
     <div style="height:3px;background:#1a2a3a;border-radius:2px;position:relative;overflow:visible">
       <div style="--w:28%;position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,#00d4ff,#00a0c0);border-radius:2px" class="rm-bar"></div>
       <!-- milestone noktaları -->
-      <div style="position:absolute;left:0%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#00d4ff;border:2px solid #080c12" class="rm-node" style="color:#00d4ff"></div>
+      <div style="position:absolute;left:0%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#00d4ff;border:2px solid #080c12;color:#00d4ff" class="rm-node"></div>
       <div style="position:absolute;left:28%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#00d4ff;border:2px solid #080c12;box-shadow:0 0 8px #00d4ff"></div>
       <div style="position:absolute;left:52%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#1a2a3a;border:2px solid #7C5CFF"></div>
       <div style="position:absolute;left:76%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#1a2a3a;border:2px solid #00FFB2"></div>
@@ -296,7 +346,7 @@
   </div>
 
   <!-- Faz kartları — 2 sütun grid -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:20px;margin-bottom:20px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:20px;margin-bottom:20px">
 
     <!-- FAZ 1 -->
     <div class="rm-phase" style="background:#0d1520;border:1px solid #1a3a55;border-radius:12px;padding:24px;position:relative;overflow:hidden">
@@ -305,6 +355,7 @@
         <div>
           <div style="font-family:'Share Tech Mono',monospace;color:#00d4ff;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 01</div>
           <div style="font-size:1.05rem;font-weight:700;color:#e0f0ff">IP Tasarımı &amp; Doğrulama</div>
+          <div class="rm-when">2025–2026 · SKY130 açık PDK</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
           <span class="trl-badge" style="color:#00d4ff;border-color:#00d4ff33">TRL 2-3</span>
@@ -326,10 +377,10 @@
         <div class="milestone ms-prog">◎ RTL/HDL IP geliştirme</div>
         <div class="milestone ms-prog">◎ FPGA CNN+SNN prototip</div>
         <div class="milestone ms-prog">◎ OpenLane sentez akışı</div>
-        <div class="milestone ms-todo">○ IP blok kütüphanesi</div>
+        <div class="milestone ms-todo">○ Analog + sayısal eş-simülasyon</div>
       </div>
       <div style="margin-top:14px;padding:10px;background:#00d4ff08;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#3a8a9a">
-        → YITAL'a aktarıma hazır doğrulanmış IP blokları
+        → Test çipine hazır, doğrulanmış karma sinyal IP blokları
       </div>
     </div>
 
@@ -339,7 +390,8 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
         <div>
           <div style="font-family:'Share Tech Mono',monospace;color:#7C5CFF;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 02</div>
-          <div style="font-size:1.05rem;font-weight:700;color:#e0e0ff">Tape-out &amp; Patent</div>
+          <div style="font-size:1.05rem;font-weight:700;color:#e0e0ff">SKY130 Test Çipi &amp; Patent</div>
+          <div class="rm-when">2026–2027</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
           <span class="trl-badge" style="color:#7C5CFF;border-color:#7C5CFF33">TRL 3-4</span>
@@ -353,13 +405,13 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
         <div class="milestone ms-todo">○ SKY130 MPW tape-out</div>
         <div class="milestone ms-todo">○ TÜRKPATENT NPU topolojisi</div>
+        <div class="milestone ms-todo">○ Analog/sayısal karma test</div>
         <div class="milestone ms-todo">○ TRL 3-4 doğrulaması</div>
         <div class="milestone ms-todo">○ IP blok kütüphanesi v1</div>
-        <div class="milestone ms-todo">○ Analog/dijital karma test</div>
-        <div class="milestone ms-todo">○ CMOS uyumluluk raporu</div>
+        <div class="milestone ms-todo">○ Memristör PDK gereksinimleri</div>
       </div>
       <div style="margin-top:14px;padding:10px;background:#7C5CFF08;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#4a3a7a">
-        → Tescilli NPU IP · Fiziksel doğrulanmış çip topolojisi
+        → İlk silikon ölçümleri · Tescilli NPU topolojisi
       </div>
     </div>
 
@@ -369,7 +421,8 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
         <div>
           <div style="font-family:'Share Tech Mono',monospace;color:#00FFB2;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 03</div>
-          <div style="font-size:1.05rem;font-weight:700;color:#e0ffe8">Lisanslama &amp; Ticarileşme</div>
+          <div style="font-size:1.05rem;font-weight:700;color:#e0ffe8">YİTAL 110 nm Geçişi</div>
+          <div class="rm-when">2027 ve sonrası</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
           <span class="trl-badge" style="color:#00FFB2;border-color:#00FFB233">TRL 4-5</span>
@@ -381,15 +434,15 @@
         <div style="height:4px;background:#1a2a3a;border-radius:2px"></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
-        <div class="milestone ms-todo">○ NRE anlaşmaları (Savunma OEM)</div>
-        <div class="milestone ms-todo">○ IP royalty sözleşmeleri</div>
-        <div class="milestone ms-todo">○ Spin-off kurulumu</div>
-        <div class="milestone ms-todo">○ PDK kütüphane lisansı</div>
-        <div class="milestone ms-todo">○ RISC-V AXI4 entegrasyon</div>
-        <div class="milestone ms-todo">○ İlk OEM müşteri teslimatı</div>
+        <div class="milestone ms-todo">○ Sayısal bloklar → 110 nm hücre kütüphanesi</div>
+        <div class="milestone ms-todo">○ Analog bloklar → 110 nm PDK</div>
+        <div class="milestone ms-todo">○ Ayrı memristör modül PDK'sı</div>
+        <div class="milestone ms-todo">○ İlk yerli karma sinyal test çipi</div>
+        <div class="milestone ms-todo">○ İHA/aviyonik saha testleri</div>
+        <div class="milestone ms-todo">○ NRE anlaşmaları (savunma OEM)</div>
       </div>
       <div style="margin-top:14px;padding:10px;background:#00FFB208;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#1a5a3a">
-        → İlk NRE gelirleri · Spin-off · IP royalty modeli aktif
+        → Yerli süreçte ilk silikon · Memristör PDK v1
       </div>
     </div>
 
@@ -399,7 +452,8 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
         <div>
           <div style="font-family:'Share Tech Mono',monospace;color:#C9972A;font-size:.72rem;letter-spacing:2px;margin-bottom:6px">PHASE 04</div>
-          <div style="font-size:1.05rem;font-weight:700;color:#fff0d0">YITAL 65nm &amp; Ölçeklendirme</div>
+          <div style="font-size:1.05rem;font-weight:700;color:#fff0d0">YİTAL 65 nm &amp; Ölçeklendirme</div>
+          <div class="rm-when">110 nm sonrası</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
           <span class="trl-badge" style="color:#C9972A;border-color:#C9972A33">TRL 5-7</span>
@@ -411,15 +465,15 @@
         <div style="height:4px;background:#1a2a3a;border-radius:2px"></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
-        <div class="milestone ms-todo">○ YITAL 65nm CMOS tape-out</div>
-        <div class="milestone ms-todo">○ Monolitik NPU ASIC üretimi</div>
-        <div class="milestone ms-todo">○ 65nm PDK kütüphanesi</div>
-        <div class="milestone ms-todo">○ Seri üretim lisansı</div>
-        <div class="milestone ms-todo">○ CMOS IP portföy genişletme</div>
-        <div class="milestone ms-todo">○ TRL 6+ · İhracat</div>
+        <div class="milestone ms-todo">○ 65 nm'ye taşıma (sayısal + analog)</div>
+        <div class="milestone ms-todo">○ 65 nm memristör PDK'sı</div>
+        <div class="milestone ms-todo">○ Monolitik NPU ASIC</div>
+        <div class="milestone ms-todo">○ RISC-V AXI4 entegrasyon</div>
+        <div class="milestone ms-todo">○ IP lisans / royalty modeli</div>
+        <div class="milestone ms-todo">○ Spin-off · TRL 6+ · İhracat</div>
       </div>
       <div style="margin-top:14px;padding:10px;background:#C9972A08;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:#5a4a1a">
-        → Türkiye'nin ilk yerli NPU ASIC'i · First-mover · Seri üretim
+        → Yerli NPU ASIC · Seri üretim · Lisanslama
       </div>
     </div>
   </div>
@@ -432,13 +486,13 @@
         <span style="font-family:'Share Tech Mono',monospace;color:#6a6aaa;font-size:.72rem;letter-spacing:2px;display:block;margin-bottom:4px">5-YEAR VISION</span>
         <span style="font-size:1.1rem;font-weight:700;color:#c8c8ff">Yerli Çip Ekosistemi</span>
       </div>
-      <span style="margin-left:auto;font-size:.75rem;padding:4px 14px;border-radius:4px;background:#ffffff08;color:#6a6aaa;border:1px solid #ffffff14;font-family:'Share Tech Mono',monospace">CMOS · RISC-V · YITAL · IP</span>
+      <span style="margin-left:auto;font-size:.75rem;padding:4px 14px;border-radius:4px;background:#ffffff08;color:#6a6aaa;border:1px solid #ffffff14;font-family:'Share Tech Mono',monospace">CMOS · RISC-V · YİTAL · IP</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
       <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
         <div style="width:32px;height:32px;border-radius:8px;background:#00d4ff18;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">🔬</div>
         <div style="color:#00d4ff;font-weight:600;font-size:.9rem;margin-bottom:6px">CMOS Uyumlu IP Portföyü</div>
-        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">Standart üretim süreciyle tam uyumlu, lisanslanabilir memristör IP ailesi. Analog + dijital karma sinyal.</p>
+        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">Lisanslanabilir memristör IP ailesi. Analog + sayısal karma sinyal bloklar.</p>
       </div>
       <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
         <div style="width:32px;height:32px;border-radius:8px;background:#7C5CFF18;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">⚙️</div>
@@ -447,13 +501,13 @@
       </div>
       <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
         <div style="width:32px;height:32px;border-radius:8px;background:#00FFB218;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">🏭</div>
-        <div style="color:#00FFB2;font-weight:600;font-size:.9rem;margin-bottom:6px">YITAL 65nm PDK</div>
-        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">TÜBİTAK YITAL 65nm fab için memristör hücre PDK kütüphanesi. Yerli foundry ile üretim.</p>
+        <div style="color:#00FFB2;font-weight:600;font-size:.9rem;margin-bottom:6px">YİTAL Memristör PDK'sı</div>
+        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">Standart CMOS PDK'sına ek, ayrı memristör modül PDK'sı: önce 110 nm, ardından 65 nm. Yerli foundry ile üretim.</p>
       </div>
       <div style="background:#ffffff05;border:1px solid #ffffff0e;border-radius:8px;padding:16px">
         <div style="width:32px;height:32px;border-radius:8px;background:#C9972A18;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:10px">🌍</div>
         <div style="color:#C9972A;font-weight:600;font-size:.9rem;margin-bottom:6px">Küresel IP Lisanslama</div>
-        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">EAR/FDPR bağımsız yerli IP. Müttefik ülkeler ve AB pazarına ihracat. Per-chip royalty modeli.</p>
+        <p style="color:#607d8b;font-size:.82rem;line-height:1.55">Yerli IP. Müttefik ülkeler ve AB pazarına ihracat. Çip başına royalty modeli.</p>
       </div>
     </div>
   </div>
@@ -474,44 +528,118 @@
   </svg>
   <div style="max-width:960px; margin:auto; position:relative;">
     <h2>Yayınlar &amp; Akademik Temel</h2>
-    <p class="lead">Akademik Ar-Ge temelli · 41 yayın · 16 WoS · h=9
-      &nbsp;<a href="https://avesis.erdogan.edu.tr/fatih.gul" target="_blank" style="color:#00d4ff;font-size:0.85rem;">AVESİS →</a>
-      &nbsp;<a href="https://scholar.google.com.tr/citations?user=NNcvQEMAAAAJ" target="_blank" style="color:#00d4ff;font-size:0.85rem;">Google Scholar →</a>
+    <p class="lead">Akademik Ar-Ge temelli · 55 yayın · 29 WoS · Google Scholar 939 atıf, h=14
+      &nbsp;<a href="https://avesis.erdogan.edu.tr/fatih.gul" target="_blank" rel="noopener" style="font-size:0.85rem;">AVESİS →</a>
+      &nbsp;<a href="https://scholar.google.com.tr/citations?user=Fv0m_PsAAAAJ" target="_blank" rel="noopener" style="font-size:0.85rem;">Google Scholar →</a>
+      &nbsp;<a href="https://orcid.org/0000-0001-5072-2122" target="_blank" rel="noopener" style="font-size:0.85rem;">ORCID →</a>
     </p>
+
+    <h3 style="color:#a0c8e0;font-size:1.05rem;margin-bottom:16px;">Seçilmiş yayınlar · 2024–2026</h3>
     <div class="grid">
-      <div class="card" style="border-left:3px solid #00d4ff;">
-        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">IEEE ACCESS · 2024</div>
-        <h3 style="font-size:1rem;">CMOS Uyumlu Memristör Karakterizasyonu</h3>
-        <p style="margin-top:8px;">HfO₂/TiO₂ RRAM — ON/OFF &gt;7000, N=113 deney, tekdüzelik %49</p>
-        <a href="https://avesis.erdogan.edu.tr/fatih.gul/publications" target="_blank" style="display:inline-block;margin-top:12px;color:#00d4ff;font-size:0.82rem;">Makaleye git →</a>
+      <div class="pub">
+        <div class="venue">ADVANCES IN PHYSICS: X · EYLÜL 2026</div>
+        <h3>Memristive devices for edge artificial intelligence and neuromorphic computing: from resistive-switching physics to system-level co-design</h3>
+        <div class="authors">Gül F.</div>
+        <p>Direnç anahtarlama fiziğinden sistem düzeyi eş-tasarıma derleme. Cilt 11, 2732088.</p>
+        <a class="doi" href="https://doi.org/10.1080/23746149.2026.2732088" target="_blank" rel="noopener">doi:10.1080/23746149.2026.2732088 →</a>
       </div>
-      <div class="card" style="border-left:3px solid #7C5CFF;">
-        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">INTEGRATION (VLSI J.) · 2025</div>
-        <h3 style="font-size:1rem;">Analog Crossbar NPU Devre Tasarımı</h3>
-        <p style="margin-top:8px;">SKY130 PDK üzerinde memristör crossbar NPU SPICE doğrulaması</p>
-        <a href="https://avesis.erdogan.edu.tr/fatih.gul/publications" target="_blank" style="display:inline-block;margin-top:12px;color:#7C5CFF;font-size:0.82rem;">Makaleye git →</a>
+      <div class="pub" style="border-left-color:#7C5CFF;">
+        <div class="venue">SCIENTIFIC REPORTS · EYLÜL 2026</div>
+        <h3>Activation function saturation determines robustness to conductance nonlinearity in analog in-memory learning</h3>
+        <div class="authors">Gökgöz B., Aydın T., Gül F.</div>
+        <p>Üretilmiş bir TiO₂ cihazın ölçülmüş iletkenlik karakteristiğiyle beş aktivasyon fonksiyonunun analog bellek-içi öğrenmede karşılaştırılması.</p>
+        <a class="doi" href="https://doi.org/10.1038/s41598-026-72039-3" target="_blank" rel="noopener" style="color:#7C5CFF;">doi:10.1038/s41598-026-72039-3 →</a>
       </div>
-      <div class="card" style="border-left:3px solid #00FFB2;">
-        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">NEURAL NETWORKS · ELSEVIER</div>
-        <h3 style="font-size:1rem;">Memristör Tabanlı SNN Çıkarımı</h3>
-        <p style="margin-top:8px;">Nöromorfik hesaplama mimarisi — spike kodlama ve eğitim akışı</p>
-        <a href="https://avesis.erdogan.edu.tr/fatih.gul/publications" target="_blank" style="display:inline-block;margin-top:12px;color:#00FFB2;font-size:0.82rem;">Makaleye git →</a>
+      <div class="pub" style="border-left-color:#00FFB2;">
+        <div class="venue">IEEE ELECTRON DEVICE LETTERS · TEMMUZ 2026</div>
+        <h3>Machine learning prediction of threshold switching voltages indicates a filamentary-to-homogeneous transition in TiO₂/TiO₂₋ₓ/TiO₂ memristors</h3>
+        <div class="authors">Gül F.</div>
+        <p>62 nano ölçekli TiO₂ memristörde 763 anahtarlama döngüsü; hiç görülmemiş cihazlarda V<sub>SET</sub> için R² = 0,875. Cilt 47(7), 1478–1481.</p>
+        <a class="doi" href="https://doi.org/10.1109/LED.2026.3695757" target="_blank" rel="noopener" style="color:#00FFB2;">doi:10.1109/LED.2026.3695757 →</a>
       </div>
-      <div class="card" style="border-left:3px solid #C9972A;">
-        <div style="font-size:0.75rem;color:#607d8b;margin-bottom:6px;font-family:'Share Tech Mono',monospace;">FİKRİ MÜLKİYET · IP PROTECTION</div>
-        <h3 style="font-size:1rem;">IP Tescil Hazırlık Aşaması</h3>
-        <p style="margin-top:8px;">NPU mimari topolojisi için fikri mülkiyet stratejisi geliştirilmekte; TÜRKPATENT başvuru süreci planlanmaktadır. Prior art araştırması ve claim drafting aşamasında.</p>
-        <span style="display:inline-block;margin-top:12px;color:#C9972A;font-size:0.82rem;font-family:'Share Tech Mono',monospace;">Pre-filing · Patent Pending Strategy</span>
+      <div class="pub" style="border-left-color:#C9972A;">
+        <div class="venue">JKSU – COMPUTER &amp; INFORMATION SCIENCES · HAZİRAN 2026</div>
+        <h3>Energy efficiency of AI hardware: a systematic review of GPU, TPU, and NPU architectures in the LLM era</h3>
+        <div class="authors">Gül F.</div>
+        <p>62 çalışmalık PRISMA 2020 sistematik derleme; GPU/TPU/NPU enerji verimliliği için üç katmanlı normalizasyon. Cilt 38(6), 499.</p>
+        <a class="doi" href="https://doi.org/10.1007/s44443-026-00900-6" target="_blank" rel="noopener" style="color:#C9972A;">doi:10.1007/s44443-026-00900-6 →</a>
+      </div>
+      <div class="pub">
+        <div class="venue">MATER. SCI. SEMICOND. PROCESS. · AĞUSTOS 2026</div>
+        <h3>Forming-free Al/ZnO/Al memristors as near-ideal physical unclonable functions: surface defect chemistry and interfacial conduction analysis</h3>
+        <div class="authors">Gül F.</div>
+        <p>ZnO memristörlerin donanım güvenliğinde (PUF) kullanımı. Cilt 216, 111070.</p>
+        <a class="doi" href="https://doi.org/10.1016/j.mssp.2026.111070" target="_blank" rel="noopener">doi:10.1016/j.mssp.2026.111070 →</a>
+      </div>
+      <div class="pub" style="border-left-color:#7C5CFF;">
+        <div class="venue">AEU – INT. J. ELECTRON. COMMUN. · EYLÜL 2026</div>
+        <h3>A universal mem-element emulator with a single MO-OTA core: memristor, memcapacitor, and meminductor in one reconfigurable circuit</h3>
+        <div class="authors">Gül F., Babacan Y.</div>
+        <p>Üç mem-elemanı tek yeniden yapılandırılabilir devrede toplayan emülatör. Cilt 217, 156622.</p>
+        <a class="doi" href="https://doi.org/10.1016/j.aeue.2026.156622" target="_blank" rel="noopener" style="color:#7C5CFF;">doi:10.1016/j.aeue.2026.156622 →</a>
+      </div>
+      <div class="pub" style="border-left-color:#00FFB2;">
+        <div class="venue">COMPUT. APPL. ENG. EDUC. · EKİM 2026</div>
+        <h3>An open-source SPICE simulation suite for teaching the memristor: standard inverter–OTA emulator with Bloom-aligned laboratory exercises</h3>
+        <div class="authors">Gül F.</div>
+        <p>Memristör öğretimi için açık kaynak SPICE paketi. Cilt 34(6), e70283.</p>
+        <a class="doi" href="https://doi.org/10.1002/cae.70283" target="_blank" rel="noopener" style="color:#00FFB2;">doi:10.1002/cae.70283 →</a>
+      </div>
+      <div class="pub" style="border-left-color:#C9972A;">
+        <div class="venue">IEEE TRANS. EMERG. TOPICS COMPUT. INTELL. · 2025</div>
+        <h3>Design and optimisations of metal-oxide artificial synaptic device based machine learning model</h3>
+        <div class="authors">Yılmaz Y., Gül F.</div>
+        <p>TiO₂ sinaptik cihaz tabanlı donanım sinir ağlarında doğruluğu artıran optimizasyon yöntemlerinin karşılaştırması. Cilt 9(5), 3233–3243.</p>
+        <a class="doi" href="https://doi.org/10.1109/TETCI.2024.3446448" target="_blank" rel="noopener" style="color:#C9972A;">doi:10.1109/TETCI.2024.3446448 →</a>
+      </div>
+      <div class="pub">
+        <div class="venue">INTEGRATION, THE VLSI JOURNAL · 2024</div>
+        <h3>Neuro-inspired hardware solutions for high-performance computing: a TiO₂-based nano-synaptic device approach with backpropagation</h3>
+        <div class="authors">Yılmaz Y., Gül F.</div>
+        <p>TiO₂ nano-sinaptik cihazla geri yayılımlı öğrenme. Cilt 97, 102206.</p>
+        <a class="doi" href="https://doi.org/10.1016/j.vlsi.2024.102206" target="_blank" rel="noopener">doi:10.1016/j.vlsi.2024.102206 →</a>
+      </div>
+      <div class="pub" style="border-left-color:#7C5CFF;">
+        <div class="venue">IEEE ACCESS · 2024</div>
+        <h3>Optimizing memristor-based synaptic devices for enhanced energy efficiency and accuracy in neuromorphic machine learning</h3>
+        <div class="authors">Gökgöz B., Aydın T., Gül F.</div>
+        <p>Nöromorfik öğrenmede enerji verimliliği ve doğruluk için memristör sinaptik cihaz optimizasyonu. Cilt 12, 154401–154417.</p>
+        <a class="doi" href="https://doi.org/10.1109/ACCESS.2024.3482110" target="_blank" rel="noopener" style="color:#7C5CFF;">doi:10.1109/ACCESS.2024.3482110 →</a>
+      </div>
+      <div class="pub" style="border-left-color:#00FFB2;">
+        <div class="venue">CONCURRENCY AND COMPUTATION · 2024</div>
+        <h3>An overview memristor based hardware accelerators for deep neural network</h3>
+        <div class="authors">Gökgöz B., Gül F., Aydın T.</div>
+        <p>Derin sinir ağı çıkarımı için memristör tabanlı donanım hızlandırıcılar derlemesi. Cilt 36(9), e7997.</p>
+        <a class="doi" href="https://doi.org/10.1002/cpe.7997" target="_blank" rel="noopener" style="color:#00FFB2;">doi:10.1002/cpe.7997 →</a>
+      </div>
+      <div class="pub" style="border-left-color:#C9972A;">
+        <div class="venue">FİKRİ MÜLKİYET · IP PROTECTION</div>
+        <h3>IP Tescil Hazırlık Aşaması</h3>
+        <p>NPU mimari topolojisi için fikri mülkiyet stratejisi geliştirilmekte; TÜRKPATENT başvuru süreci planlanmaktadır. Prior art araştırması ve claim drafting aşamasında.</p>
+        <span style="margin-top:auto;padding-top:10px;color:#C9972A;font-size:0.8rem;font-family:'Share Tech Mono',monospace;">Pre-filing · Patent Pending Strategy</span>
       </div>
     </div>
+
+    <h3 style="color:#a0c8e0;font-size:1.05rem;margin:40px 0 4px;">Temel çalışmalar · 2017–2020</h3>
+    <ul class="found-list">
+      <li><span class="yr">2020</span>Nano-scale single layer TiO₂-based artificial synaptic device. <em>Applied Nanoscience</em> 10(2), 611–616. <a href="https://doi.org/10.1007/s13204-019-01179-y" target="_blank" rel="noopener">DOI →</a></li>
+      <li><span class="yr">2019</span>Addressing the sneak-path problem in crossbar RRAM devices using memristor-based one Schottky diode–one resistor array. <em>Results in Physics</em> 12, 1091–1096. <a href="https://doi.org/10.1016/j.rinp.2018.12.092" target="_blank" rel="noopener">DOI →</a></li>
+      <li><span class="yr">2019</span>Circuit implementation of nano-scale TiO₂ memristor using only metal-oxide-semiconductor transistors. <em>IEEE Electron Device Letters</em> 40(4), 643–646. <a href="https://doi.org/10.1109/LED.2019.2899889" target="_blank" rel="noopener">DOI →</a></li>
+      <li><span class="yr">2018</span>The fabrication and MOSFET-only circuit implementation of semiconductor memristor. <em>IEEE Transactions on Electron Devices</em> 65(4), 1625–1632. <a href="https://doi.org/10.1109/TED.2018.2808530" target="_blank" rel="noopener">DOI →</a></li>
+      <li><span class="yr">2018</span>Carrier transport mechanism and bipolar resistive switching behavior of a nano-scale thin film TiO₂ memristor. <em>Ceramics International</em> 44(10), 11417–11423. <a href="https://doi.org/10.1016/j.ceramint.2018.03.198" target="_blank" rel="noopener">DOI →</a></li>
+      <li><span class="yr">2017</span>ZnO and ZnO₁₋ₓ based thin film memristors: the effects of oxygen deficiency and thickness in resistive switching behavior. <em>Ceramics International</em> 43(14), 10770–10775. <a href="https://doi.org/10.1016/j.ceramint.2017.05.090" target="_blank" rel="noopener">DOI →</a></li>
+      <li><span class="yr">2017</span>Bipolar resistive switching and conduction mechanism of an Al/ZnO/Al-based memristor. <em>Superlattices and Microstructures</em> 101, 172–179. <a href="https://doi.org/10.1016/j.spmi.2016.11.043" target="_blank" rel="noopener">DOI →</a></li>
+    </ul>
+    <p class="src-note">Künyeler Crossref kayıtlarından doğrulanmıştır. Sayılar AVESİS ve Google Scholar'dan alınmıştır. Son güncelleme: 27 Ekim 2026.</p>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer id="iletisim">
     <img src="logo.png" alt="MemRSyS">
     <br>
-    &copy; 2026 MemRSyS Technologies &nbsp;|&nbsp; RTEÜ EEM AI &amp; IoT Lab &nbsp;|&nbsp; Rize, Türkiye
+    &copy; 2026 MemRSyS &nbsp;|&nbsp; RTEÜ Elektrik-Elektronik Mühendisliği · Yapay Zekâ ve Nesnelerin İnterneti Araştırma Laboratuvarı &nbsp;|&nbsp; Rize, Türkiye
     <br>
     <a href="mailto:fatih.gul@erdogan.edu.tr" style="color:#3a7a99;">fatih.gul@erdogan.edu.tr</a>
 </footer>
